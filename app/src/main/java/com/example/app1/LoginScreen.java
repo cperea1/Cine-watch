@@ -29,4 +29,4 @@ public class LoginScreen extends AppCompatActivity {
 
 
     } //end onCreate
-} //end MainActivity
+} //end class
