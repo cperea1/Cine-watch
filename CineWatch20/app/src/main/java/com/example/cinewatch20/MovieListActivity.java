@@ -85,7 +85,7 @@ public class MovieListActivity extends AppCompatActivity {
     private void GetRetrofitResponseAccordingToID() {
         MovieApi movieApi = Service.getMovieApi();
         Call<MovieModel> responseCall = movieApi
-                .getMovie(343611,
+                .getMovie(550,
                         Credentials.API_KEY);
 
         responseCall.enqueue(new Callback<MovieModel>() {
@@ -93,7 +93,7 @@ public class MovieListActivity extends AppCompatActivity {
             public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
                 if (response.code() == 200) {
                     MovieModel movie = response.body();
-                    Log.v("Tag", "The Response " + movie.getTitle());
+                    Log.v("Tag", "Name: " + movie.getTitle());
                 } //end if
                 else {
                     try {
