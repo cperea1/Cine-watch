@@ -2,11 +2,13 @@ package com.example.cinewatch20;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Movie;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.cinewatch20.models.MovieModel;
 import com.example.cinewatch20.request.Service;
@@ -25,23 +27,27 @@ import retrofit2.Response;
 public class MovieListActivity extends AppCompatActivity {
 
     Button btn;
+    TextView movie_name;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         btn = findViewById(R.id.button);
+        movie_name = findViewById(R.id.movie_name);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 GetRetrofitResponseAccordingToID();
-            }
+            } //end onClick
         });
 
 
-    }
+    } //end onCreate
 
     private void GetRetrofitResponse() {
         MovieApi movieApi = Service.getMovieApi();
@@ -94,6 +100,7 @@ public class MovieListActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     MovieModel movie = response.body();
                     Log.v("Tag", "Name: " + movie.getTitle());
+                    movie_name.setText(movie.getTitle());
                 } //end if
                 else {
                     try {
