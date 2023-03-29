@@ -1,6 +1,10 @@
 package com.example.cinewatch20;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.graphics.Movie;
@@ -10,11 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.cinewatch20.Adapters.MovieRecyclerView;
+import com.example.cinewatch20.Adapters.OnMovieListener;
 import com.example.cinewatch20.models.MovieModel;
 import com.example.cinewatch20.request.Service;
 import com.example.cinewatch20.response.MovieSearchResponse;
 import com.example.cinewatch20.utils.Credentials;
 import com.example.cinewatch20.utils.MovieApi;
+import com.example.cinewatch20.viewModels.MovieListViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,10 +31,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieListActivity extends AppCompatActivity {
+public class MovieListActivity extends AppCompatActivity implements OnMovieListener {
 
-    Button btn;
-    TextView movie_name;
+    //Recycler View
+    private RecyclerView recyclerView;
+    private MovieRecyclerView movieRecyclerViewAdapter;
+
+    //view model
+    private MovieListViewModel movieListViewModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,88 +46,59 @@ public class MovieListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn = findViewById(R.id.button);
-        movie_name = findViewById(R.id.movie_name);
+        recyclerView = findViewById(R.id.recyclerView);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                GetRetrofitResponseAccordingToID();
-            } //end onClick
-        });
+        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
+
+
+        ConfigureRecyclerView();
+        observingAnyChange();
+        searchMovieApi("fast", 1);
+
+
 
 
     } //end onCreate
 
-    private void GetRetrofitResponse() {
-        MovieApi movieApi = Service.getMovieApi();
-
-        Call<MovieSearchResponse> responseCall = movieApi
-                .searchMovie(
-                        Credentials.API_KEY,
-                        "Lilo & Stitch",
-                        1
-                );
-
-        responseCall.enqueue(new Callback<MovieSearchResponse>() {
+    private void observingAnyChange() {
+        movieListViewModel.getMovies().observe(this, new Observer<List<MovieModel>>() {
             @Override
-            public void onResponse(Call<MovieSearchResponse> call, Response<MovieSearchResponse> response) {
-                if (response.code() == 200) {
-                    Log.v("Tag", "the response" + response.body().toString());
+            public void onChanged(List<MovieModel> movieModels) {
+                if (movieModels != null) {
+                    for (MovieModel movieModel: movieModels) {
+                        Log.v("Tag", "onChanged: " + movieModel.getTitle());
 
-                    List<MovieModel> movies = new ArrayList<>(response.body().getMovies());
-
-                    for (MovieModel movie: movies) {
-                        Log.v("Tag", "The Release Date " + movie.getRelease_date());
-                    } //end for
-                } //end if
-                else {
-                    try {
-                        Log.v("Tag", "Error" + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        movieRecyclerViewAdapter.setmMovies(movieModels);
                     }
-                } //end else
-            }
-
-            @Override
-            public void onFailure(Call<MovieSearchResponse> call, Throwable t) {
-
-            }
-        });
-
-    } //end GRR
-
-    private void GetRetrofitResponseAccordingToID() {
-        MovieApi movieApi = Service.getMovieApi();
-        Call<MovieModel> responseCall = movieApi
-                .getMovie(550,
-                        Credentials.API_KEY);
-
-        responseCall.enqueue(new Callback<MovieModel>() {
-            @Override
-            public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
-                if (response.code() == 200) {
-                    MovieModel movie = response.body();
-                    Log.v("Tag", "Name: " + movie.getTitle());
-                    movie_name.setText(movie.getTitle());
                 } //end if
-                else {
-                    try {
-                        Log.v("Tag", "Error  " + response.errorBody().string());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } {
-
-                    }
-                } //end else
-            }
-
-            @Override
-            public void onFailure(Call<MovieModel> call, Throwable t) {
-
-            }
+            } //end onChanged
         });
+    } //end OAC
+
+    private void searchMovieApi(String query, int pageNumber) {
+        movieListViewModel.searchMovieApi(query, pageNumber);
     }
+
+
+    private void ConfigureRecyclerView() {
+        //Live Data cannot be passed via the constructor
+        movieRecyclerViewAdapter = new MovieRecyclerView(this);
+
+        recyclerView.setAdapter(movieRecyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onMovieClick(int position) {
+
+    }
+
+    @Override
+    public void onCategoryClick(String category) {
+
+    }
+
+
+//
 } //end class
