@@ -43,7 +43,7 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         //Image View
         Glide.with(holder.itemView.getContext())
-                .load(mMovies.get(i).getPoster_path())
+                .load("https://image.tmdb.org/t/p/w500" + mMovies.get(i).getPoster_path())
                 .into(((MovieViewHolder) holder).movie_img);
 
     }
@@ -60,6 +60,7 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public void setmMovies(List<MovieModel> mMovies) {
         this.mMovies = mMovies;
+        notifyDataSetChanged();
     }
 
 } //end class

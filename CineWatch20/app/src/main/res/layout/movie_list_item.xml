@@ -50,8 +50,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="90"
                         android:textSize="14sp"
-                        android:text="Category"
-                        android:id="@+id/movie_category"
+                        android:text="Release Date"
+                        android:id="@+id/movie_release_date"
                         android:gravity="start"/>
 
                     <TextView
