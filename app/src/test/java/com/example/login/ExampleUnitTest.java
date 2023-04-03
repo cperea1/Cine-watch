@@ -1,4 +1,4 @@
-package com.example.cine_watch;
+package com.example.login;
 
 import org.junit.Test;
 

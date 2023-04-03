@@ -9,13 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf50716-9be0-450f-95d9-2a093b88f17b" name="Changes" comment="" />
+    <list default="true" id="f27b1f82-0cbe-4db8-9165-c127d990a614" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\frank\.android\avd\Virtual_Phone_CW.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\jose5\.android\avd\Pixel_XL_API_UpsideDownCake.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -24,7 +24,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2McQhs6ToI3EzPI46aKlcXNUUIh" />
+  <component name="ProjectId" id="2NiXReEla4e3GNj1QubWEwvZ9s6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -35,17 +35,19 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/frank/Documents/School/CineWatch/app"
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\frank\Documents\School\CineWatch\app" />
+    <key name="android.template.-1334164662">
+      <recent name="com.example.login" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="Cine-Watch.app.main" />
+      <module name="Login.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -106,11 +108,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2bf50716-9be0-450f-95d9-2a093b88f17b" name="Changes" comment="" />
-      <created>1678064513158</created>
+      <changelist id="f27b1f82-0cbe-4db8-9165-c127d990a614" name="Changes" comment="" />
+      <created>1680147874599</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1678064513158</updated>
+      <updated>1680147874599</updated>
     </task>
     <servers />
   </component>

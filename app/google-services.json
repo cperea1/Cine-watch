@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "153562389401",
-    "firebase_url": "https://cine-watch-e4357-default-rtdb.firebaseio.com",
-    "project_id": "cine-watch-e4357",
-    "storage_bucket": "cine-watch-e4357.appspot.com"
+    "project_number": "568585235742",
+    "project_id": "login-register-firebase-6ca0d",
+    "storage_bucket": "login-register-firebase-6ca0d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:153562389401:android:3aa86f4ad927797f7b1108",
+        "mobilesdk_app_id": "1:568585235742:android:dbd41f0bd76a279f84ad0f",
         "android_client_info": {
-          "package_name": "com.example.cine_watch"
+          "package_name": "com.example.login"
         }
       },
       "oauth_client": [
         {
-          "client_id": "153562389401-1i1ui2pmsar3i6snc7jckhir3ft478he.apps.googleusercontent.com",
+          "client_id": "568585235742-ccdehqsfhmq4kqaig4u37gf3jgh8um20.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAwwfLVK_kS7ysJlv9I10OpOwfuVSqIYWI"
+          "current_key": "AIzaSyBt7oRlEGT-idQN_NvBaq8hP9pTQgzbP20"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "153562389401-1i1ui2pmsar3i6snc7jckhir3ft478he.apps.googleusercontent.com",
+              "client_id": "568585235742-ccdehqsfhmq4kqaig4u37gf3jgh8um20.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
