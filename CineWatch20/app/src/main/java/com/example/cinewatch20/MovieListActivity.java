@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.cinewatch20.Adapters.MovieRecyclerView;
+import com.example.cinewatch20.Adapters.MovieViewHolder;
 import com.example.cinewatch20.Adapters.OnMovieListener;
 import com.example.cinewatch20.models.MovieModel;
 import com.example.cinewatch20.viewModels.MovieListViewModel;
@@ -20,8 +21,9 @@ import java.util.List;
 public class MovieListActivity extends AppCompatActivity implements OnMovieListener {
 
     //Recycler View
-    private RecyclerView recyclerView;
-    private MovieRecyclerView movieRecyclerAdapter;
+    private RecyclerView recyclerView; //good
+    private MovieRecyclerView movieRecyclerAdapter ;
+    //private MovieViewHolder movieViewHolder;
 
     //view model
     private MovieListViewModel movieListViewModel;
@@ -32,15 +34,17 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView); //good
 
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
 
-        ConfigureRecyclerView();
+        ConfigureRecyclerView(); //good
+
         ObserveAnyChange();
-        searchMovieApi("fast", 1);
+        searchMovieApi("nice", 1);
+
 
 
 
@@ -54,27 +58,30 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
                 if (movieModels != null) {
                     for (MovieModel movieModel: movieModels) {
                         Log.v("Tag", "onChanged: " + movieModel.getTitle());
-
-
                     } //end for
+
                     movieRecyclerAdapter.setmMovies(movieModels);
+
                 } //end if
              } //end onChanged
         });
-    } //end OAC
+    } //end OAC -----good
 
+    //4 - Calling method in main activity
     private void searchMovieApi(String query, int pageNumber) {
         movieListViewModel.searchMovieApi(query, pageNumber);
-    }
+    } //end SMA ---- good
+
 
 
     private void ConfigureRecyclerView() {
         //Live Data cannot be passed via the constructor
         movieRecyclerAdapter = new MovieRecyclerView(this);
 
+
         recyclerView.setAdapter(movieRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
+    } //end CRV ----- good
 
     @Override
     public void onMovieClick(int position) {

@@ -1,5 +1,6 @@
 package com.example.cinewatch20.Adapters;
 
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,12 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Log.v("Here", "we made it here");
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item,
                 parent, false);
+
+        // MovieViewHolder holder = new MovieViewHolder(view, onMovieListener );
 
         return new MovieViewHolder(view, onMovieListener);
     }
@@ -35,7 +40,7 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         ((MovieViewHolder)holder).title.setText(mMovies.get(i).getTitle());
         ((MovieViewHolder)holder).releaseDate.setText(mMovies.get(i).getRelease_date());
-        ((MovieViewHolder)holder).duration.setText(mMovies.get(i).getRuntime());
+        ((MovieViewHolder)holder).duration.setText(mMovies.get(i).getRuntime() + "");
 
         //rating bar
         ((MovieViewHolder)holder).rating_bar.setRating(mMovies.get(i).getVote_average() / 2);
