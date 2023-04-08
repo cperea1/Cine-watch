@@ -94,4 +94,17 @@ public class MovieModel implements Parcelable {
         parcel.writeFloat(vote_average);
         parcel.writeInt(runtime);
     }
+
+    @Override
+    public String toString() {
+        return "MovieModel{" +
+                "title='" + title + '\'' +
+                ", poster_path='" + poster_path + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", movie_id=" + movie_id +
+                ", overview='" + overview + '\'' +
+                ", vote_average=" + vote_average +
+                ", runtime=" + runtime +
+                '}';
+    }
 } //end class

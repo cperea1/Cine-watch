@@ -65,7 +65,7 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public void setmMovies(List<MovieModel> mMovies) {
         this.mMovies = mMovies;
-        notifyDataSetChanged();
+
     }
 
 } //end class

@@ -1,6 +1,7 @@
 package com.example.cinewatch20.utils;
 
 import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.response.MovieResponse;
 import com.example.cinewatch20.response.MovieSearchResponse;
 
 import retrofit2.Call;
@@ -26,4 +27,8 @@ public interface MovieApi {
             @Query("api_key") String key
             );
 
+    @GET("/3/movie/popular?")
+    Call<MovieSearchResponse> getPopularMovie(
+            @Query("api_key") String key
+    );
 }

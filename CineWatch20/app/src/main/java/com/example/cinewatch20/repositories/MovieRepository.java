@@ -35,4 +35,7 @@ public class MovieRepository {
         movieApiClient.searchMoviesApi(query, pageNumber);
     }
 
+    public void getPopular() {
+        movieApiClient.getPopular();
+    }
 } //end class

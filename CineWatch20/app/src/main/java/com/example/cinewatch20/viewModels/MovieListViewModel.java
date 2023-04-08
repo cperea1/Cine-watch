@@ -32,4 +32,7 @@ public class MovieListViewModel extends ViewModel {
         movieRepository.searchMovieApi(query, pageNumber);
     }
 
-} //end clas
+    public void getPopular() {
+        movieRepository.getPopular();
+    }
+} //end class
