@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -34,8 +35,6 @@ android {
 }
 
 dependencies {
-    def lifecycle_version = "2.2.0"
-    def arch_version = "2.1.0"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
@@ -54,6 +53,15 @@ dependencies {
 
     //Swiper
     implementation 'com.lorentzos.swipecards:library:1.0.9@aar'
+
+    //FireBase
+    implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-auth:21.2.0'
+    implementation platform('com.google.firebase:firebase-bom:31.4.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-firestore'
 
 
     //View Model
