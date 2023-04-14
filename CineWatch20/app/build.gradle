@@ -55,6 +55,10 @@ dependencies {
     //Swiper
     implementation 'com.lorentzos.swipecards:library:1.0.9@aar'
 
+    //Tenser Flow Lite
+    implementation 'com.google.guava:guava:28.1-android'
+    implementation 'org.tensorflow:tensorflow-lite:2.2.0'
+
 
     //View Model
     //implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.1'

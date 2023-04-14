@@ -151,12 +151,9 @@ public class MovieApiClient {
                         e.printStackTrace();
                         mMovies.postValue(null);
                     }
-
-
-
                     break;
-                case "search by name":
 
+                case "search by name":
                     try {
                         Response response =  searchMovies(query, pageNumber).execute();
                         if (cancelRequest) {
@@ -165,12 +162,12 @@ public class MovieApiClient {
 
                         if (response.code() == 200) {
                             List<MovieModel> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+
                             if (pageNumber == 1) {
                                 mMovies.postValue(list);
                             } //end if
                             else {
                                 List<MovieModel> currentMovies  = mMovies.getValue();
-                                currentMovies.clear();
                                 currentMovies.addAll(list);
                                 mMovies.postValue(currentMovies);
                             } //end else
@@ -203,7 +200,6 @@ public class MovieApiClient {
                     } //end if
                     else {
                         List<MovieModel> currentMovies  = mMovies.getValue();
-                        currentMovies.clear();
                         currentMovies.addAll(list);
                         mMovies.postValue(currentMovies);
                     } //end else
