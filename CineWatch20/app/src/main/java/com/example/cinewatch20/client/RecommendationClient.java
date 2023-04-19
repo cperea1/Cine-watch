@@ -26,7 +26,10 @@ import java.util.Map;
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 /**
  * Interface to load TfLite model and provide recommendations.
  */
@@ -128,7 +131,11 @@ public class RecommendationClient implements Serializable {
                 break;
             }
             inputIds[i] = item.getId();
+<<<<<<< Updated upstream
             i++;
+=======
+            ++i;
+>>>>>>> Stashed changes
         }
         return inputIds;
     }

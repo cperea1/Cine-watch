@@ -6,7 +6,12 @@
   ],
   "movieList": "sorted_movie_vocab.json",
   "genreList": "movie_genre_vocab.txt",
+<<<<<<< Updated upstream
   "topK": 10,
+=======
+  "movieSelectionList" : "selected_movie_vocab.json",
+  "topK": 100,
+>>>>>>> Stashed changes
   "outputLength": 100,
   "outputIdsIndex": 1,
   "outputScoresIndex": 0

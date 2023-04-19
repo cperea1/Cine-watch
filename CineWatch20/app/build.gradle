@@ -50,12 +50,18 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.4'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
 
     //Swiper
     implementation 'com.lorentzos.swipecards:library:1.0.9@aar'
 
     //Tenser Flow Lite
+    implementation 'com.google.guava:guava:28.1-android'
+    implementation 'org.tensorflow:tensorflow-lite:2.2.0'
+
+    //Tensor Flow Lite
     implementation 'com.google.guava:guava:28.1-android'
     implementation 'org.tensorflow:tensorflow-lite:2.2.0'
 

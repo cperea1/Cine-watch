@@ -42,8 +42,9 @@ public class MovieApiClient {
         return mMovies;
     }
 
-
-
+    public void setmMovies(List<MovieModel> m) {
+        this.mMovies.postValue(m);
+    }
 
     // This Method will be used ...
     public void searchMoviesApi(String query, int pageNumber) {
@@ -261,6 +262,7 @@ public class MovieApiClient {
             Log.v("Tag", "Cancelling Search Request");
             cancelRequest = true;
         } //end Cancel Request
+
 
 
 

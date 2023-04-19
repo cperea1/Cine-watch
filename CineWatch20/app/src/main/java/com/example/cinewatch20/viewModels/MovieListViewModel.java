@@ -35,4 +35,8 @@ public class MovieListViewModel extends ViewModel {
     public void getPopular() {
         movieRepository.getPopular();
     }
+
+    public void setmMovies(List<MovieModel> mMovies) {
+        movieRepository.setmMovies(mMovies);
+    }
 } //end class

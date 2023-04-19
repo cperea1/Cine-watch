@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.LoginScreen"
+    android:orientation="vertical"
+    android:background="#FF7900"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/logo_picture"
+        android:transitionName="logo_image"
+        android:layout_width="172dp"
+        android:layout_height="167dp"
+        android:contentDescription="@string/camera_picture"
+        android:src="@drawable/camera"
+        tools:ignore="ImageContrastCheck" />
+    <TextView
+        android:id="@+id/logo_name"
+        android:transitionName="logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_there_welcome_back"
+        android:textSize="40sp"
+        android:textColor="#000"
+        android:fontFamily="@font/aclonica_regular"/>
+
+    <TextView
+        android:id="@+id/slogan_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/advent_pro"
+        android:text="@string/sign_in_to_continue"
+        android:textSize="18sp"
+        android:textColor="#000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="48dp"
+        android:maxWidth="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/email"
+            style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/advent_pro"
+                android:textColorHint="#B71C1C"
+                android:textSize="18sp"
+                tools:ignore="VisualLintTextFieldSize"
+                android:background="#E0E0E0"
+                android:inputType="textEmailAddress"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/advent_pro"
+                android:inputType="textPassword"
+                android:textColorHint="#B71C1C"
+                android:background="#E0E0E0"
+                android:textSize="18sp"
+                tools:ignore="VisualLintTextFieldSize" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/teal_700"
+            android:fontFamily="@font/aclonica_regular"
+            android:elevation="10dp"
+            android:maxWidth="300dp"
+            android:textSize="18sp"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            tools:ignore="VisualLintButtonSize" />
+
+        <Button
+            android:id="@+id/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="#00000000"
+            android:elevation="0dp"
+            android:maxWidth="300dp"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:text="@string/forgot_password"
+            android:fontFamily="@font/advent_pro"/>
+
+
+        <Button
+            android:id="@+id/sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_gravity="end"
+            android:background="#00000000"
+            android:elevation="0sp"
+            android:textSize="18sp"
+            android:fontFamily="@font/advent_pro"
+            android:text="@string/new_user"
+            android:textColor="#000" />
+
+
+    </LinearLayout>
+</LinearLayout>

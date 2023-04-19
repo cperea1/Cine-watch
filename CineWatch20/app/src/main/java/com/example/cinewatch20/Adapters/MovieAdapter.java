@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.cinewatch20.R;
 import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.utils.Credentials;
 
 import java.util.List;
 
@@ -44,13 +45,13 @@ public class MovieAdapter extends ArrayAdapter<MovieModel> {
         MovieModel movieModel = getItem(position);
 
         // Set the name in the TextView
-        holder.rating_bar.setRating(mMovies.get(position).getVote_average());
-        holder.duration.setText(mMovies.get(position).getRuntime() + "");
-        holder.releaseDate.setText(mMovies.get(position).getRelease_date());
+        //holder.rating_bar.setRating(mMovies.get(position).getVote_average());
+        //holder.duration.setText(mMovies.get(position).getRuntime() + "");
+        //holder.overview.setText(mMovies.get(position).getOverview());
         holder.title.setText(mMovies.get(position).getTitle());
 
         Glide.with(holder.itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w500" + mMovies.get(position).getPoster_path())
+                .load(Credentials.TMDB_POSTER_PATH + mMovies.get(position).getImageUrl())
                 .into((holder).movie_img);
 
 
@@ -61,7 +62,7 @@ public class MovieAdapter extends ArrayAdapter<MovieModel> {
 
     public void setmMovies(List<MovieModel> mMovies) {
         this.mMovies = mMovies;
-        //notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 }
 

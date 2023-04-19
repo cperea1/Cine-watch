@@ -1,8 +1,7 @@
-package com.example.cinewatch20;
+package com.example.cinewatch20.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.cinewatch20.Adapters.MovieRecyclerView;
 import com.example.cinewatch20.Adapters.OnMovieListener;
+import com.example.cinewatch20.R;
 import com.example.cinewatch20.models.MovieModel;
 import com.example.cinewatch20.viewModels.MovieListViewModel;
 

@@ -29,6 +29,13 @@ public class MovieModel implements Parcelable {
         this.runtime = runtime;
     } //end constructor
 
+    public MovieModel(String title, String poster_path, int movie_id, String overview) {
+        this.title = title;
+        this.poster_path = poster_path;
+        this.movie_id = movie_id;
+        this.overview = overview;
+    }
+
     protected MovieModel(Parcel in) {
         title = in.readString();
         poster_path = in.readString();
@@ -55,7 +62,7 @@ public class MovieModel implements Parcelable {
         return title;
     }
 
-    public String getPoster_path() {
+    public String getImageUrl() {
         return poster_path;
     }
 
@@ -63,11 +70,11 @@ public class MovieModel implements Parcelable {
         return release_date;
     }
 
-    public int getMovie_id() {
+    public int getId() {
         return movie_id;
     }
 
-    public String getOverview() {
+    public String getDescription() {
         return overview;
     }
 

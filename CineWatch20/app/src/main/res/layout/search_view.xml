@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MovieListActivity">
+    tools:context=".Activities.MovieListActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,7 +12,6 @@
         android:layout_width="410dp"
         android:layout_height="620dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_behavior="com.google.android.material.appbarAppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toBottomOf="parent"

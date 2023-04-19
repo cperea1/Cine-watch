@@ -55,6 +55,17 @@ public class MovieItem implements Serializable {
         this.dislikes = dislikes==null?0:dislikes;
     }
 
+<<<<<<< Updated upstream
+=======
+    public MovieItem(int id, String title, String imageUrl, String description) {
+        this.id = id;
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        genres = null;
+    }
+
+>>>>>>> Stashed changes
     public String getTrailerID() {
         return trailerID;
     }
@@ -90,6 +101,11 @@ public class MovieItem implements Serializable {
         return genres;
     }
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     public String getImageUrl() {
         return imageUrl;
     }

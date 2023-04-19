@@ -38,4 +38,8 @@ public class MovieRepository {
     public void getPopular() {
         movieApiClient.getPopular();
     }
+
+    public void setmMovies(List<MovieModel> mMovies) {
+        movieApiClient.setmMovies(mMovies);
+    }
 } //end class

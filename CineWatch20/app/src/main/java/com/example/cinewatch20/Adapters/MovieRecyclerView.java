@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.cinewatch20.R;
 import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.utils.Credentials;
 
 import java.util.List;
 
@@ -39,16 +40,16 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         ((MovieViewHolder)holder).title.setText(mMovies.get(i).getTitle());
-        ((MovieViewHolder)holder).releaseDate.setText(mMovies.get(i).getRelease_date());
-        ((MovieViewHolder)holder).duration.setText(mMovies.get(i).getRuntime() + "");
+        //((MovieViewHolder)holder).overview.setText(mMovies.get(i).getOverview());
+        //((MovieViewHolder)holder).duration.setText(mMovies.get(i).getRuntime() + "");
 
         //rating bar
-        ((MovieViewHolder)holder).rating_bar.setRating(mMovies.get(i).getVote_average() / 2);
+        //((MovieViewHolder)holder).rating_bar.setRating(mMovies.get(i).getVote_average() / 2);
 
 
         //Image View
         Glide.with(holder.itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w500" + mMovies.get(i).getPoster_path())
+                .load(Credentials.TMDB_POSTER_PATH + mMovies.get(i).getImageUrl())
                 .into(((MovieViewHolder) holder).movie_img);
 
     }

@@ -13,7 +13,7 @@ import com.example.cinewatch20.R;
 public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     //Widgets
-    TextView title, releaseDate, duration;
+    TextView title, overview, duration;
     ImageView movie_img;
     RatingBar rating_bar;
 
@@ -27,10 +27,10 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.onMovieListener = onMovieListener;
 
         title = itemView.findViewById(R.id.movie_title);
-        releaseDate = itemView.findViewById(R.id.movie_release_date);
-        duration = itemView.findViewById(R.id.movie_duration);
+        //overview = itemView.findViewById(R.id.overview);
+
         movie_img = itemView.findViewById(R.id.movie_img);
-        rating_bar = itemView.findViewById(R.id.rating_bar);
+
 
         itemView.setOnClickListener(this);
     } //end constructor

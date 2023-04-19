@@ -1,12 +1,20 @@
 package com.example.cinewatch20.models;
 
 import com.example.cinewatch20.data.MovieItem;
+<<<<<<< Updated upstream
+=======
+import com.example.cinewatch20.utils.MovieDetailsServiceUtil;
+>>>>>>> Stashed changes
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 public class User implements Serializable {
     private String id;
     private String name;
@@ -15,6 +23,7 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
+<<<<<<< Updated upstream
     private List<MovieItem> likedMovies = new ArrayList<>();
     private List<MovieItem> dislikedMovies = new ArrayList<>();
     private List<MovieItem> bookmarkedMovies = new ArrayList<>();
@@ -26,6 +35,17 @@ public class User implements Serializable {
         this.name = name;
         this.age = age;
         this.contact = contact;
+=======
+    private List<MovieModel> likedMovies = new ArrayList<>();
+    private List<MovieModel> dislikedMovies = new ArrayList<>();
+    private List<MovieModel> bookmarkedMovies = new ArrayList<>();
+
+    public User(){}
+
+    public User(String id, String name, String username, String email, String password){
+        this.id = id;
+        this.name = name;
+>>>>>>> Stashed changes
         this.email = email;
         this.password = password;
 
@@ -87,6 +107,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
+<<<<<<< Updated upstream
     public List<MovieItem> getLikedMovies() {
         return likedMovies;
     }
@@ -95,22 +116,54 @@ public class User implements Serializable {
         this.likedMovies.add(movieItem);
     }
 
+=======
+    public List<MovieModel> getLikedMovies() {
+        return likedMovies;
+    }
+
+//    public void addLikedMovieItem(MovieItem movieItem) {
+//        this.likedMovies.add(movieItem);
+//    }
+
+    public void addLikedMovieItem(MovieModel movieModel) {
+        this.likedMovies.add(movieModel);
+    }
+
+
+>>>>>>> Stashed changes
     public void removeLikedMovieItem(int movieItemId){
         this.likedMovies = this.likedMovies.stream()
                 .filter(movie -> movieItemId != movie.getId()).collect(Collectors.toList());
     }
 
+<<<<<<< Updated upstream
     public void addAllLikedMovieItem(List<MovieItem> likedMovieItems) {
+=======
+    public void addAllLikedMovieItem(List<MovieModel> likedMovieItems) {
+>>>>>>> Stashed changes
         this.likedMovies.addAll(likedMovieItems);
     }
 
 
+<<<<<<< Updated upstream
     public List<MovieItem> getDislikedMovies() {
         return dislikedMovies;
     }
 
     public void addDislikedMovieItem(MovieItem movieItem) {
         this.dislikedMovies.add(movieItem);
+=======
+    public List<MovieModel> getDislikedMovies() {
+        return dislikedMovies;
+    }
+
+//    public void addDislikedMovieItem(MovieItem movieItem) {
+//        this.dislikedMovies.add(movieItem);
+//    }
+
+    public void addDislikedMovieItem(MovieModel movieModels) {
+        this.dislikedMovies.add(movieModels);
+>>>>>>> Stashed changes
     }
 
     public void removeDislikedMovie(int movieItemId){
@@ -118,12 +171,21 @@ public class User implements Serializable {
                 .filter(movie -> movieItemId != movie.getId()).collect(Collectors.toList());
     }
 
+<<<<<<< Updated upstream
     public List<MovieItem> getBookmarkedMovies() {
         return bookmarkedMovies;
     }
 
     public void addBookmarkedMovies(MovieItem movieItem) {
         this.bookmarkedMovies.add(movieItem);
+=======
+    public List<MovieModel> getBookmarkedMovies() {
+        return bookmarkedMovies;
+    }
+
+    public void addBookmarkedMovies(MovieModel movieModel) {
+        this.bookmarkedMovies.add(movieModel);
+>>>>>>> Stashed changes
     }
 
     public void removeBookmarkedMovies(int movieItemId){
