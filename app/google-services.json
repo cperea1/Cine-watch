@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "568585235742",
+    "firebase_url": "https://login-register-firebase-6ca0d-default-rtdb.firebaseio.com",
+    "project_id": "login-register-firebase-6ca0d",
+    "storage_bucket": "login-register-firebase-6ca0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568585235742:android:867f54fba6966e0b84ad0f",
+        "android_client_info": {
+          "package_name": "com.example.card_swipe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568585235742-05siho5noagrh49600ame9ob0krpgc5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt7oRlEGT-idQN_NvBaq8hP9pTQgzbP20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568585235742-05siho5noagrh49600ame9ob0krpgc5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568585235742:android:2902e86f21c600bc84ad0f",
+        "android_client_info": {
+          "package_name": "com.example.cinewatch20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568585235742-05siho5noagrh49600ame9ob0krpgc5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt7oRlEGT-idQN_NvBaq8hP9pTQgzbP20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568585235742-05siho5noagrh49600ame9ob0krpgc5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568585235742:android:dbd41f0bd76a279f84ad0f",
+        "android_client_info": {
+          "package_name": "com.example.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568585235742-05siho5noagrh49600ame9ob0krpgc5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt7oRlEGT-idQN_NvBaq8hP9pTQgzbP20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568585235742-05siho5noagrh49600ame9ob0krpgc5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
