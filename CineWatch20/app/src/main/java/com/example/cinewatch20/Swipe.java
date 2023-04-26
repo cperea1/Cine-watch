@@ -28,7 +28,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener {
     SwipeFlingAdapterView flingAdapterView;
     private MovieAdapter movieAdapter;
 
-    Button search_view;
+    Button search_view, accountButton;
 
     //view model
     private MovieListViewModel movieListViewModel;
@@ -50,6 +50,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener {
 
         flingAdapterView= findViewById(R.id.card);
         search_view = findViewById(R.id.scroll_view);
+        accountButton = findViewById(R.id.account);
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
@@ -107,6 +108,17 @@ public class Swipe extends AppCompatActivity implements OnMovieListener {
                 // Perform your action here
 
                 Intent intent = new Intent(Swipe.this, MovieListActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        accountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Perform your action here
+
+                Intent intent = new Intent(Swipe.this, Account.class);
                 startActivity(intent);
 
             }
