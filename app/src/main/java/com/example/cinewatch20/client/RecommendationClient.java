@@ -174,7 +174,7 @@ public class RecommendationClient implements Serializable {
     }
 
     /**
-     * Postprocess to gets results from tflite inference.
+     * Postprocess to get results from tflite inference.
      */
     @WorkerThread
     synchronized List<Result> postProcess(

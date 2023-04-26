@@ -26,16 +26,15 @@
     <TextView
         android:id="@+id/opening_title"
         android:transitionName="logo_text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:fontFamily="@font/aclonica_regular"
         android:textColor="#000"
         android:text="@string/cinewatch"
         android:textAlignment="center"
-        android:textSize="70sp"
+        android:textSize="65dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera" />
 

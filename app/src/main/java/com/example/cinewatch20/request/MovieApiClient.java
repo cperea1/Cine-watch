@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.cinewatch20.AppExecutors;
-import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.response.MovieSearchResponse;
 import com.example.cinewatch20.utils.Credentials;
 
@@ -21,7 +21,7 @@ import retrofit2.Response;
 
 public class MovieApiClient {
     //Live Data
-    private MutableLiveData<List<MovieModel>> mMovies;
+    private MutableLiveData<List<MovieItem>> mMovies;
 
     private static MovieApiClient instance;
 
@@ -38,11 +38,11 @@ public class MovieApiClient {
         mMovies = new MutableLiveData<>();
     } //end constructor
 
-    public LiveData<List<MovieModel>> getMovies() {
+    public LiveData<List<MovieItem>> getMovies() {
         return mMovies;
     }
 
-    public void setmMovies(List<MovieModel> m) {
+    public void setmMovies(List<MovieItem> m) {
         this.mMovies.postValue(m);
     }
 
@@ -132,12 +132,12 @@ public class MovieApiClient {
                         } //end if
 
                         if (response.code() == 200) {
-                            List<MovieModel> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                            List<MovieItem> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
                     if (pageNumber == 1) {
                         mMovies.postValue(list);
                     } //end if
                     else {
-                        List<MovieModel> currentMovies  = mMovies.getValue();
+                        List<MovieItem> currentMovies  = mMovies.getValue();
                         currentMovies.addAll(list);
                         mMovies.postValue(currentMovies);
                     } //end else
@@ -161,17 +161,19 @@ public class MovieApiClient {
                             return;
                         } //end if
 
-                        if (response.code() == 200) {
-                            List<MovieModel> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                        Log.v("Response Code: ", response.code() + "");
+                        if (response.code() == 200) { //200 means it worked
+                            List<MovieItem> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
 
                             if (pageNumber == 1) {
                                 mMovies.postValue(list);
                             } //end if
                             else {
-                                List<MovieModel> currentMovies  = mMovies.getValue();
+                                List<MovieItem> currentMovies  = mMovies.getValue();
                                 currentMovies.addAll(list);
                                 mMovies.postValue(currentMovies);
                             } //end else
+
                         } //end if
                         else {
                             String error = response.errorBody().string();
@@ -195,15 +197,10 @@ public class MovieApiClient {
                         } //end if
 
                         if (response.code() == 200) {
-                            List<MovieModel> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
-                    if (pageNumber == 1) {
-                        mMovies.postValue(list);
-                    } //end if
-                    else {
-                        List<MovieModel> currentMovies  = mMovies.getValue();
-                        currentMovies.addAll(list);
-                        mMovies.postValue(currentMovies);
-                    } //end else
+                            Log.v("TAG", "Response code = 200");
+                            List<MovieItem> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                            Log.v("TAG", "List(0) = " + list.get(0));
+                            mMovies.postValue(list);
                         } //end if
                         else {
                             String error = response.errorBody().string();
@@ -239,7 +236,7 @@ public class MovieApiClient {
 
         } //end getMovies
 
-        private Call<MovieModel> getMovies(int movie_id) {
+        private Call<MovieItem> getMovies(int movie_id) {
             return Service.getMovieApi().getMovie(
                     movie_id,
                     Credentials.API_KEY
@@ -269,13 +266,4 @@ public class MovieApiClient {
 
 
     } //end class
-
-
-
-
-
-
-
-
-
 } //end class

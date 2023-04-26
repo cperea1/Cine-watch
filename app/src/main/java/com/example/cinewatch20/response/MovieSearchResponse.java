@@ -1,7 +1,7 @@
 package com.example.cinewatch20.response;
 
 
-import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.data.MovieItem;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -15,13 +15,13 @@ public class MovieSearchResponse {
 
     @SerializedName("results")
     @Expose()
-    private List<MovieModel> movies;
+    private List<MovieItem> movies;
 
     public int getTotal_count() {
         return total_count;
     }
 
-    public List<MovieModel> getMovies() {
+    public List<MovieItem> getMovies() {
         return movies;
     }
 

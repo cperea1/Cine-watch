@@ -15,7 +15,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
     //Widgets
     TextView title, overview, duration;
     ImageView movie_img;
-    RatingBar rating_bar;
+    //RatingBar rating_bar;
 
 
     //Click Listener

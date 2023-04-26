@@ -91,18 +91,19 @@ public class LoginScreen extends AppCompatActivity {
                         }
                     });
         });
-    }
+    } //end onCreate
 
     @Override
     public void onStart() {
         super.onStart();
 
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) {
-//            Intent intent = new Intent(getApplicationContext(), Swipe.class);
-//            startActivity(intent);
-        }//end On Start
-    //}
-}
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            Intent intent = new Intent(getApplicationContext(), Swipe.class);
+            intent.putExtra(Credentials.ACTIVE_USER_KEY, mAuth.getCurrentUser().getUid());
+            startActivity(intent);
+        }//end if
+    } //end onStart
+} //end class
 
 

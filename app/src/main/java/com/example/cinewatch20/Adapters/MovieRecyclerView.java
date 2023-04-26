@@ -1,6 +1,7 @@
 package com.example.cinewatch20.Adapters;
 
 //import android.util.Log;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cinewatch20.R;
-import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.utils.Credentials;
 
 import java.util.List;
 
 public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<MovieModel> mMovies;
+    private List<MovieItem> mMovies;
     private OnMovieListener onMovieListener;
 
     public MovieRecyclerView(OnMovieListener onMovieListener) {
@@ -38,19 +39,22 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        ((MovieViewHolder)holder).title.setText(mMovies.get(i).getTitle());
-        //((MovieViewHolder)holder).overview.setText(mMovies.get(i).getOverview());
-        //((MovieViewHolder)holder).duration.setText(mMovies.get(i).getRuntime() + "");
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ((MovieViewHolder)holder).title.setText(mMovies.get(position).getTitle());
+        //((MovieViewHolder)holder).overview.setText(mMovies.get(position).getOverview());
+        //((MovieViewHolder)holder).duration.setText(mMovies.get(position).getRuntime() + "");
 
         //rating bar
-        //((MovieViewHolder)holder).rating_bar.setRating(mMovies.get(i).getVote_average() / 2);
+        //((MovieViewHolder)holder).rating_bar.setRating(mMovies.get(position).getVote_average() / 2);
 
 
         //Image View
         Glide.with(holder.itemView.getContext())
-                .load(Credentials.TMDB_POSTER_PATH + mMovies.get(i).getImageUrl())
+                .load(Credentials.TMDB_POSTER_PATH + mMovies.get(position).getPoster_path())
                 .into(((MovieViewHolder) holder).movie_img);
+
+        Log.v("movie poster:", Credentials.TMDB_POSTER_PATH + mMovies.get(position).getPoster_path());
+
 
     }
 
@@ -64,7 +68,7 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    public void setmMovies(List<MovieModel> mMovies) {
+    public void setmMovies(List<MovieItem> mMovies) {
         this.mMovies = mMovies;
 
     }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,14 +18,20 @@ import android.widget.Toast;
 
 import com.example.cinewatch20.Adapters.MovieRecyclerView;
 import com.example.cinewatch20.Adapters.OnMovieListener;
+import com.example.cinewatch20.CineWatchApplication;
 import com.example.cinewatch20.R;
-import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.data.MovieItem;
+import com.example.cinewatch20.database.DatabaseInstance;
+import com.example.cinewatch20.models.User;
+import com.example.cinewatch20.utils.Credentials;
 import com.example.cinewatch20.viewModels.MovieListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieListActivity extends AppCompatActivity implements OnMovieListener {
 
+    private static final String TAG = "CineWatch - MovieListActivity";
     //Recycler View
     private RecyclerView recyclerView; //good
     private MovieRecyclerView movieRecyclerAdapter ;
@@ -33,14 +40,19 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
     //view model
     private MovieListViewModel movieListViewModel;
 
+    User activeUser;
+
     Button home;
+    private Handler handler;
+    private List<MovieItem> movies;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_view);
-
+        String userId = this.getIntent().getStringExtra(Credentials.ACTIVE_USER_KEY);
+        activeUser = ((CineWatchApplication)getApplication()).getActiveSessionUser();
         recyclerView = findViewById(R.id.recyclerView); //good
 
         home = findViewById(R.id.home_button);
@@ -54,6 +66,7 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
                 // Perform your action here
 
                 Intent intent = new Intent(MovieListActivity.this, Swipe.class);
+                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
                 startActivity(intent);
 
             } //end onclick
@@ -64,12 +77,25 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
         ConfigureRecyclerView();
         ObserveAnyChange();
 
+        getPopular();
+        movieRecyclerAdapter.notifyDataSetChanged();
 
 
 
 
 
     } //end onCreate
+
+//    @Override
+//    protected void onPause() {
+//
+//        super.onPause();
+//
+//        movieListViewModel.setmMovies(new ArrayList<>());
+//
+//
+//
+//    }
 
     private void SetupSearchView() {
         final SearchView searchView = findViewById(R.id.searchView);
@@ -94,15 +120,15 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
     }
 
     private void ObserveAnyChange() {
-        movieListViewModel.getMovies().observe(this, new Observer<List<MovieModel>>() {
+        movieListViewModel.getMovies().observe(this, new Observer<List<MovieItem>>() {
             @Override
-            public void onChanged(List<MovieModel> movieModels) {
-                if (movieModels != null) {
-                    for (MovieModel movieModel: movieModels) {
-                        Log.v("Tag", "onChanged: " + movieModel.getTitle());
-                    } //end for
+            public void onChanged(List<MovieItem> movieItems) {
+                if (movieItems != null) {
+//                    for (MovieItem movieItem: movieItems) {
+//                        Log.v("Tag", "onChanged: " + movieItem.getTitle());
+//                    } //end for
 
-                    movieRecyclerAdapter.setmMovies(movieModels);
+                    movieRecyclerAdapter.setmMovies(movieItems);
                     movieRecyclerAdapter.notifyDataSetChanged();
 
                 } //end if
@@ -127,13 +153,31 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
     @Override
     public void onMovieClick(int position) {
-        Toast.makeText(this, "The Position " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Info Page", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onCategoryClick(String category) {
 
     }
+
+    private void loadActiveUserFromDb(String userId) {
+        handler.post(() -> {
+            Log.i(TAG, "Fetching user details from database");
+            if(userId == null)
+                return;
+            DatabaseInstance.DATABASE.getReference().child("Users").child(userId).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    activeUser = task.getResult().getValue(User.class);
+                    ((CineWatchApplication)getApplication()).setActiveSessionUser(activeUser);
+                    Log.d(TAG, "User " + userId + " fetched from database: " + activeUser);
+                    movies = activeUser.getLikedMovies();
+                } else {
+                    Log.e(TAG, "Unable to fetch active user");
+                }
+            });
+        });
+    } //end method
 
 
 //

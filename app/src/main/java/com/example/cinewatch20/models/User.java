@@ -1,6 +1,7 @@
 package com.example.cinewatch20.models;
 
 import com.example.cinewatch20.data.MovieItem;
+import com.example.cinewatch20.service.model.MovieDetails;
 import com.example.cinewatch20.utils.MovieDetailsServiceUtil;
 
 
@@ -20,9 +21,9 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String password;
-    private List<MovieModel> likedMovies = new ArrayList<>();
-    private List<MovieModel> dislikedMovies = new ArrayList<>();
-    private List<MovieModel> bookmarkedMovies = new ArrayList<>();
+    private List<MovieItem> likedMovies = new ArrayList<>();
+    private List<MovieItem> dislikedMovies = new ArrayList<>();
+    private List<MovieItem> bookmarkedMovies = new ArrayList<>();
 
     public User(){}
 
@@ -98,13 +99,13 @@ public class User implements Serializable {
     }
 
 
-    public List<MovieModel> getLikedMovies() {
+    public List<MovieItem> getLikedMovies() {
         return likedMovies;
     }
 
 
-    public void addLikedMovieItem(MovieModel movieModel) {
-        this.likedMovies.add(movieModel);
+    public void addLikedMovieItem(MovieItem movieItem) {
+        this.likedMovies.add(movieItem);
     }
 
 
@@ -116,18 +117,18 @@ public class User implements Serializable {
 
 
 
-    public void addAllLikedMovieItem(List<MovieModel> likedMovieItems) {
+    public void addAllLikedMovieItem(List<MovieItem> likedMovieItems) {
 
         this.likedMovies.addAll(likedMovieItems);
     }
 
-    public List<MovieModel> getDislikedMovies() {
+    public List<MovieItem> getDislikedMovies() {
         return dislikedMovies;
     }
 
 
-    public void addDislikedMovieItem(MovieModel movieModels) {
-        this.dislikedMovies.add(movieModels);
+    public void addDislikedMovieItem(MovieItem movieItems) {
+        this.dislikedMovies.add(movieItems);
     }
 
     public void removeDislikedMovie(int movieItemId){
@@ -135,12 +136,12 @@ public class User implements Serializable {
                 .filter(movie -> movieItemId != movie.getId()).collect(Collectors.toList());
     }
 
-    public List<MovieModel> getBookmarkedMovies() {
+    public List<MovieItem> getBookmarkedMovies() {
         return bookmarkedMovies;
     }
 
-    public void addBookmarkedMovies(MovieModel movieModel) {
-        this.bookmarkedMovies.add(movieModel);
+    public void addBookmarkedMovies(MovieItem movieItem) {
+        this.bookmarkedMovies.add(movieItem);
 
     }
 

@@ -1,9 +1,8 @@
 package com.example.cinewatch20.repositories;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.request.MovieApiClient;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class MovieRepository {
         movieApiClient = MovieApiClient.getInstance();
     } //end constructor
 
-    public LiveData<List<MovieModel>> getMovies() {
+    public LiveData<List<MovieItem>> getMovies() {
         return movieApiClient.getMovies();
     } //end getter
 
@@ -39,7 +38,7 @@ public class MovieRepository {
         movieApiClient.getPopular();
     }
 
-    public void setmMovies(List<MovieModel> mMovies) {
+    public void setmMovies(List<MovieItem> mMovies) {
         movieApiClient.setmMovies(mMovies);
     }
 } //end class

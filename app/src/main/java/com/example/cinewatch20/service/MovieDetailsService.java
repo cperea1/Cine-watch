@@ -33,7 +33,7 @@ public class MovieDetailsService extends Service {
 
     private Binder movieDetailsBinder;
     private RequestQueue volleyRequestQueue;
-    private final String TAG = "CinemaFreak--MovieDetailsService";
+    private final String TAG = "CineWatch--MovieDetailsService";
 
     public MovieDetailsService() {
         this.movieDetailsBinder = new MovieDetailsBinder();
@@ -67,7 +67,7 @@ public class MovieDetailsService extends Service {
                 .collect(Collectors.toList());
 
         List<MovieDetails> moviesInDatabase = new ArrayList<>();
-        List<Integer> tmdbIdNotInDatabase =new ArrayList<>();
+        List<Integer> tmdbIdNotInDatabase = new ArrayList<>();
 
         DatabaseReference childRef = DatabaseInstance.DATABASE.getReference("movies");
         childRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -75,7 +75,7 @@ public class MovieDetailsService extends Service {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(int tmdbId: tmdbIds){
                     if(snapshot.hasChild(tmdbId+"")){
-                        Log.d(TAG, "Movie exists in DB. Fetching details for "+tmdbId);
+                        //Log.d(TAG, "Movie exists in DB. Fetching details for "+tmdbId);
                         MovieDetails md = mapDataToMovieDetails(tmdbId, snapshot.child(tmdbId+""));
                         moviesInDatabase.add(md);
 

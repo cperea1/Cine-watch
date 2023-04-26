@@ -4,7 +4,6 @@ import android.util.Log;
 
 
 import com.example.cinewatch20.data.MovieItem;
-import com.example.cinewatch20.models.MovieModel;
 import com.example.cinewatch20.service.model.MovieDetails;
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.utils.URIBuilder;
 
@@ -43,20 +42,6 @@ public class MovieDetailsServiceUtil {
         return movieItems;
     }
 
-    public static List<MovieModel> ItemToModel(List<MovieItem> movieItems){
-        List<MovieModel> movieModels = new ArrayList<>();
-        for(MovieItem mi : movieItems){
-            movieModels.add(new MovieModel(mi.getTitle(), mi.getImageUrl(), mi.getId(),  mi.getDescription()));
-        }
-        return movieModels;
-    }
 
-    public static List<MovieItem> ModelToItem(List<MovieModel> movieModels){
-        List<MovieItem> movieItems = new ArrayList<>();
-        for(MovieModel mm : movieModels){
-            movieItems.add(new MovieItem(mm.getId(), mm.getTitle(), mm.getImageUrl(),  mm.getDescription()));
-        }
-        return movieItems;
-    }
 
 }

@@ -13,7 +13,7 @@ public class TmdbIdMapper {
     private HashMap<Integer, Integer> tmdbMap = new HashMap<>();;
     private static final TmdbIdMapper instance = new TmdbIdMapper();
     private final String fileName = "tmdb-map.csv";
-    private final String TAG = "CinemaFreak-TmdbIdMapper";
+    private final String TAG = "CineWatch-TmdbIdMapper";
 
     private TmdbIdMapper() { }
 
@@ -36,7 +36,7 @@ public class TmdbIdMapper {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line;
             String csvSplitBy = ",";
-            br.readLine();
+            br.readLine(); //gets past the first example line
 
             while ((line = br.readLine()) != null) {
                 String[] row = line.split(csvSplitBy);

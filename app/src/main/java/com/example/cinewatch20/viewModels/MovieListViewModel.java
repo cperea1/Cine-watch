@@ -1,13 +1,9 @@
 package com.example.cinewatch20.viewModels;
 
-import android.graphics.Movie;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.repositories.MovieRepository;
 
 import java.util.List;
@@ -23,7 +19,7 @@ public class MovieListViewModel extends ViewModel {
         movieRepository = MovieRepository.getInstance();
     } //end con
 
-    public LiveData<List<MovieModel>> getMovies() {
+    public LiveData<List<MovieItem>> getMovies() {
         return movieRepository.getMovies();
     } //end getter
 
@@ -36,7 +32,7 @@ public class MovieListViewModel extends ViewModel {
         movieRepository.getPopular();
     }
 
-    public void setmMovies(List<MovieModel> mMovies) {
+    public void setmMovies(List<MovieItem> mMovies) {
         movieRepository.setmMovies(mMovies);
     }
 } //end class

@@ -1,6 +1,6 @@
 package com.example.cinewatch20.response;
 
-import com.example.cinewatch20.models.MovieModel;
+import com.example.cinewatch20.data.MovieItem;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,9 +9,9 @@ public class MovieResponse {
     //1 Finding the movie object
     @SerializedName("results")
     @Expose
-    private MovieModel movie;
+    private MovieItem movie;
 
-    public MovieModel getMovie() {
+    public MovieItem getMovie() {
         return movie;
     }
 

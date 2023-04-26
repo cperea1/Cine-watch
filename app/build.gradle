@@ -44,18 +44,19 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.5'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
 
     //Swiper
     implementation 'com.lorentzos.swipecards:library:1.0.9@aar'
 
     //FireBase
-    implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
-    implementation 'com.google.firebase:firebase-database:20.1.0'
-    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
-    implementation 'com.google.firebase:firebase-auth:21.2.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.3.0'
+    implementation 'com.google.firebase:firebase-database:20.2.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.2.0'
+    implementation 'com.google.firebase:firebase-auth:21.3.0'
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-firestore'
@@ -64,14 +65,13 @@ dependencies {
     implementation 'com.google.guava:guava:28.1-android'
     implementation 'org.tensorflow:tensorflow-lite:2.2.0'
 
-
-    //View Model
-    //implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.1'
-
-    //Live Data
-    //implementation 'androidx.lifecycle:lifecycle-livedata:2.6.1'
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //for YouTube
+//    implementation 'com.google.android.gms:play-services-location:21.0.1'
+//    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+//    implementation 'com.google.android.youtube:youtube-android-player:10.0.5'
+
 }
