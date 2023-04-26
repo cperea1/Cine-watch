@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="movie_recommendation_app">Movie Recommendation App</string>
+    <string name="account">account</string>
+    <string name="trailer">trailer</string>
+    <string name="cardstack">cardstack</string>
+    <string name="info">info</string>
+    <string name="rating">rating</string>
 </resources>

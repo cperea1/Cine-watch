@@ -10,7 +10,8 @@
         android:layout_width="268dp"
         android:layout_height="318dp"
         android:id="@+id/card_view"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+        android:background="@drawable/rounded_square_pink">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +71,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rating_bar"
                 android:layout_margin="10dp"
-                android:numStars="5"/>
+                android:numStars="5"
+                android:stepSize="1"
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                android:progressTint="@android:color/holo_orange_dark"
+                android:progressBackgroundTint="@android:color/darker_gray"
+                android:contentDescription="@string/rating"/>
 
         </LinearLayout>
 

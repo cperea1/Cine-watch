@@ -7,61 +7,69 @@
     android:layout_height="match_parent"
     tools:context=".LoginScreen"
     android:orientation="vertical"
-    android:background="#FF7900"
+    android:background="@color/pink1"
     android:padding="20dp">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/logo_picture"
-        android:transitionName="logo_image"
-        android:layout_width="172dp"
-        android:layout_height="167dp"
+        android:layout_gravity="center"
+        android:layout_width="168dp"
+        android:layout_height="160dp"
+        android:layout_margin="10dp"
         android:contentDescription="@string/camera_picture"
-        android:src="@drawable/camera"
-        tools:ignore="ImageContrastCheck" />
-    <TextView
-        android:id="@+id/logo_name"
-        android:transitionName="logo_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_there_welcome_back"
-        android:textSize="40sp"
-        android:textColor="#000"
-        android:fontFamily="@font/aclonica"/>
+        android:transitionName="logo_image"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+        app:srcCompat="@drawable/camera" />
 
-    <TextView
-        android:id="@+id/slogan_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro"
-        android:text="@string/sign_in_to_continue"
-        android:textSize="18sp"
-        android:textColor="#000"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="48dp"
-        android:maxWidth="48dp"
+        android:layout_height="504dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounded_corner"
+        android:maxWidth="48dp"
+        android:minHeight="60dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/logo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
+            android:text="@string/hello_there_welcome_back"
+            android:textColor="#000"
+            android:textSize="40sp"
+            android:transitionName="logo_text"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/slogan_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/advent_pro"
+            android:text="@string/sign_in_to_continue"
+            android:textColor="#000"
+            android:paddingLeft="10dp"
+            android:textSize="18sp" />
+
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username"
+            style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
-            android:hint="@string/Username"
-            style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox">
+            android:hint="@string/Username">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#E0E0E0"
                 android:fontFamily="@font/advent_pro"
+                android:inputType="textEmailAddress"
                 android:textColorHint="#B71C1C"
                 android:textSize="18sp"
-                tools:ignore="VisualLintTextFieldSize"
-                android:background="#E0E0E0"
-                android:inputType="textEmailAddress"/>
+                tools:ignore="VisualLintTextFieldSize" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,10 +84,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#E0E0E0"
                 android:fontFamily="@font/advent_pro"
                 android:inputType="textPassword"
                 android:textColorHint="#B71C1C"
-                android:background="#E0E0E0"
                 android:textSize="18sp"
                 tools:ignore="VisualLintTextFieldSize" />
 
@@ -88,17 +96,14 @@
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/teal_700"
+            android:background="@drawable/rounded_rectangle"
+            android:elevation="20dp"
             android:fontFamily="@font/aclonica"
-            android:elevation="10dp"
             android:maxWidth="300dp"
-            android:textSize="18sp"
-            android:text="@string/login"
-            android:textColor="@color/black"
-            tools:ignore="VisualLintButtonSize" />
+            android:text="@string/login" />
 
         <Button
             android:id="@+id/forgot_password"
@@ -107,25 +112,25 @@
             android:layout_gravity="end"
             android:background="#00000000"
             android:elevation="0dp"
+            android:fontFamily="@font/advent_pro"
             android:maxWidth="300dp"
-            android:textColor="#000"
-            android:textSize="18sp"
             android:text="@string/forgot_password"
-            android:fontFamily="@font/advent_pro"/>
+            android:textColor="#000"
+            android:textSize="18sp" />
 
 
         <Button
             android:id="@+id/sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
             android:layout_gravity="end"
             android:background="#00000000"
             android:elevation="0sp"
-            android:textSize="18sp"
             android:fontFamily="@font/advent_pro"
+            android:minHeight="48dp"
             android:text="@string/new_user"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="18sp" />
 
 
     </LinearLayout>

@@ -17,4 +17,9 @@
     <string name="welcome_back">Welcome Back</string>
     <string name="saved_movies">Save</string>
     <string name="sign_up">Sign Up</string>
+    <string name="account">account</string>
+    <string name="trailer">trailer</string>
+    <string name="cardstack">cardstack</string>
+    <string name="info">info</string>
+    <string name="rating">rating</string>
 </resources>
