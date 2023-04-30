@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginScreen extends AppCompatActivity {
 
+    private static final String TAG = "CineWatch - Login";
     ImageView image;
     TextView title, slogan, name;
     //TextInputLayout username,pass;
@@ -85,8 +87,8 @@ public class LoginScreen extends AppCompatActivity {
                         } else {
                             Toast.makeText(LoginScreen.this, "Authentication failed. Please Sign up ",
                                     Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), NewAccountPage.class);
-                            startActivity(i);
+//                            Intent i = new Intent(getApplicationContext(), NewAccountPage.class);
+//                            startActivity(i);
 
                         }
                     });
@@ -97,8 +99,12 @@ public class LoginScreen extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
+
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
+        Log.v(TAG, "currentUser: " + currentUser);
+        boolean logged_out = this.getIntent().getBooleanExtra("logged out", false);
+        if (currentUser != null && !logged_out) {
             Intent intent = new Intent(getApplicationContext(), Swipe.class);
             intent.putExtra(Credentials.ACTIVE_USER_KEY, mAuth.getCurrentUser().getUid());
             startActivity(intent);

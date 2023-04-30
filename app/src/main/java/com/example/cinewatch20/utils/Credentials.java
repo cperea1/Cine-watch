@@ -15,9 +15,9 @@ public class Credentials {
 
     public static final String ACTIVE_USER_KEY = "ActiveUserInstance";
 
-    public static final String WATCH_PROVIDERS = "/watch/providers";
+    public static final String WATCH_PROVIDERS = "watch/providers";
 
-    public static final String VIDEOS_PARAM = "append_to_response";
+    public static final String APPEND_TO_RESPONSE = "append_to_response";
 
     public static final String VIDEOS = "videos";
 }

@@ -21,6 +21,29 @@ public class MovieDetails {
     private String trailer;
     private Integer likes;
     private Integer dislikes;
+    @SerializedName("watch/providers")
+    private WatchProviders watchProviders;
+    private List<WatchProviders.Provider> providers;
+
+    public MovieDetails(){
+        genres = new ArrayList<>();
+    }
+
+    public List<WatchProviders.Provider> getProviders() {
+        return providers;
+    }
+
+    public void setProviders(List<WatchProviders.Provider> providers) {
+        this.providers = providers;
+    }
+
+    public WatchProviders getWatchProviders() {
+        return watchProviders;
+    }
+
+    public void setWatchProviders(WatchProviders watchProviders) {
+        this.watchProviders = watchProviders;
+    }
 
     public String getBackDrop() {
         return backDrop;
@@ -44,10 +67,6 @@ public class MovieDetails {
 
     public void setVideos(Videos videos) {
         this.videos = videos;
-    }
-
-    public MovieDetails(){
-        genres = new ArrayList<>();
     }
 
     public int getId() {
@@ -109,12 +128,17 @@ public class MovieDetails {
     public String toString() {
         return "MovieDetails{" +
                 "id=" + id +
-                ", original_title='" + title + '\'' +
+                ", title='" + title + '\'' +
                 ", overview='" + overview + '\'' +
-                ", poster_path='" + poster + '\'' +
-                ", genres=" + genres + '\'' +
-                ", likes=" + likes + '\'' +
+                ", poster='" + poster + '\'' +
+                ", backDrop='" + backDrop + '\'' +
+                ", genres=" + genres +
+                ", videos=" + videos +
+                ", trailer='" + trailer + '\'' +
+                ", likes=" + likes +
                 ", dislikes=" + dislikes +
+                ", watchProviders=" + watchProviders +
+                ", providers=" + providers +
                 '}';
     }
 }

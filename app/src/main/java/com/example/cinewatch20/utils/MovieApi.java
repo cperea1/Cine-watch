@@ -30,4 +30,6 @@ public interface MovieApi {
     Call<MovieSearchResponse> getPopularMovie(
             @Query("api_key") String key
     );
+
+
 }

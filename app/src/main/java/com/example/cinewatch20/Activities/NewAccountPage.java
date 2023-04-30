@@ -1,12 +1,15 @@
 package com.example.cinewatch20.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +18,8 @@ import com.example.cinewatch20.CineWatchApplication;
 import com.example.cinewatch20.R;
 import com.example.cinewatch20.models.User;
 
+import com.example.cinewatch20.utils.Credentials;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,27 +28,19 @@ import com.google.firebase.database.FirebaseDatabase;
 public class NewAccountPage extends AppCompatActivity {
     String TAG = "New Account Page";
 
-
+    User user;
     Button buttonSignup;
     private FirebaseAuth mAuth;
     EditText regName, regUsername, regEmail, regPassword;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    Animation genderanim, accountanim;
+    LinearLayout genderBday, newAccount;
 
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent =new Intent(getApplicationContext(),Swipe.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
+    @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +53,7 @@ public class NewAccountPage extends AppCompatActivity {
         regEmail = findViewById(R.id.email);
         regPassword = findViewById(R.id.password);
         buttonSignup = findViewById(R.id.next);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -92,6 +88,11 @@ public class NewAccountPage extends AppCompatActivity {
                 Toast.makeText(NewAccountPage.this, "Enter Password", Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (password.length() < 6) {
+                Toast.makeText(NewAccountPage.this, "Password must be longer than 6 characters", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
 
                 //UserHelper helperClass = new UserHelper(name, username, email, password);
                 //reference.child("user").setValue(helperClass);
@@ -101,16 +102,17 @@ public class NewAccountPage extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            User user = new User(userId, name, username,email,password);
+
+                            user = new User(userId, name, username,email,password);
+                            Log.v(TAG, "Just Created User: " + user);
 
                             ((CineWatchApplication)getApplication()).setActiveSessionUser(user);
+
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(userId)
                                     .setValue(user).addOnCompleteListener(task1 -> {
                                         if(task1.isSuccessful()){
                                             Toast.makeText(NewAccountPage.this,"User has been registered successfully!", Toast.LENGTH_LONG).show();
-                                            Intent movieSelectionIntent = new Intent(NewAccountPage.this, Swipe.class);
-                                            startActivity(movieSelectionIntent);
                                         }
                                         else{
                                             Log.e(TAG, "Unable to update database with user details: "+task1.getException());
@@ -121,20 +123,40 @@ public class NewAccountPage extends AppCompatActivity {
 
                             Toast.makeText(NewAccountPage.this, "Account Created.",
                                     Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
-                            startActivity(intent);
-                            finish();
+
 
                         }
                         else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(NewAccountPage.this, "Authentication failed.",
+                            Toast.makeText(NewAccountPage.this, "Email already used",
                                     Toast.LENGTH_SHORT).show();
+                            return;
 
                         }
+
+                        Intent intent =new Intent(getApplicationContext(), GenderAge.class);
+                        intent.putExtra(Credentials.ACTIVE_USER_KEY, user.getId());
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_account, R.anim.slide_gender);
                     });
 
+
+            //animation here
+
+
+
+
+
         });//Register Button method end
+
+
+
+
+
+
+
+
+
     }//onCreate Method End
 
 

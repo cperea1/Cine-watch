@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -48,11 +47,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
     private MovieAdapter arrayAdapter;
     List<MovieItem> mMovies;
     SwipeFlingAdapterView flingAdapterView;
-    Button search_view;
-    Button infoButton;
-    Button saveButton;
-    Button accountButton;
-    public static Button trailerButton;
+    Button search_view, infoButton, saveButton, accountButton, neverSeenButton, trailerButton;
     private MovieListViewModel movieListViewModel;
     OnMovieListener onMovieListener;
     public FirebaseAuth mAuth;
@@ -60,7 +55,6 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
     private static final String TAG = "CineWatch-Swipe";
     private String userId;
     private Handler handler;
-    private TreeMap<String, List<MovieItem>> movieGenreMap;
     private List<Result> recommendations;
     private Config config;
     List<String> genres;
@@ -82,9 +76,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         setContentView(R.layout.swipe);
 
         userId = this.getIntent().getStringExtra(Credentials.ACTIVE_USER_KEY);
-        activeUser = ((CineWatchApplication)getApplication()).getActiveSessionUser();
         handler = new Handler();
-        movieGenreMap = new TreeMap<>();
         recommendations = new ArrayList<>();
 
         try {
@@ -103,7 +95,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
 
 
         mMovies = new ArrayList<>();
-        mMovies.add(new MovieItem(-1, "helper", null, "/oT8MbC0FuAcwZhuucO1YRRHcYSS.jpg", "Yes", "", "", 0, 0));
+        mMovies.add(new MovieItem(-1, "helper", null, null, "/oT8MbC0FuAcwZhuucO1YRRHcYSS.jpg", "Yes", "", "", 0, 0));
 
         flingAdapterView= findViewById(R.id.card);
         search_view = findViewById(R.id.scroll_view);
@@ -111,6 +103,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         infoButton = findViewById(R.id.info);
         saveButton = findViewById(R.id.save);
         trailerButton = findViewById(R.id.trailer);
+        //neverSeenButton = findViewById(R.id.never_seen);
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
@@ -160,10 +153,29 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
 //                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
 //                startActivity(intent);
 
-                Toast.makeText(Swipe.this,"Account Page",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Swipe.this,"Temp: sign out",Toast.LENGTH_SHORT).show();
+
+                //use this sign out code for later!!
+                ((CineWatchApplication) getApplication()).setActiveSessionUser(null);
+                Intent intent = new Intent(Swipe.this, LoginScreen.class);
+                intent.putExtra("logged out", true);
+                startActivity(intent);
 
             }
         });
+
+//        neverSeenButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(Swipe.this,"Never Seen",Toast.LENGTH_SHORT).show();
+//                Log.v("Fling", "Movie Never Seen: " + mMovies.get(0));
+//
+//                mMovies.remove(0);
+//                arrayAdapter.getView(0, null, flingAdapterView);
+//                arrayAdapter.notifyDataSetChanged();
+//
+//            }
+//        });
 
         arrayAdapter = new MovieAdapter(Swipe.this, R.layout.movie_list_item, mMovies, onMovieListener);
 
@@ -174,16 +186,6 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
                 //work is done in swipe left and right
             }
 
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                if (velocityY > 0 && Math.abs(velocityY) > Math.abs(velocityX)) {
-                    // User flinged downwards, remove the first item from the adapter
-                    if (!mMovies.isEmpty()) {
-                        mMovies.remove(0);
-                    }
-                    return true;
-                }
-                return false;
-            }
             @Override
             public void onLeftCardExit(Object o) {
                 Toast.makeText(Swipe.this,"dislike",Toast.LENGTH_SHORT).show();
@@ -215,7 +217,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
 
             }
         });
-        flingAdapterView.setOnItemClickListener((i, o) -> Toast.makeText(Swipe.this,"data is"+ mMovies.get(i),Toast.LENGTH_SHORT).show());
+        //flingAdapterView.setOnItemClickListener((i, o) -> Toast.makeText(Swipe.this,"data is"+ mMovies.get(i),Toast.LENGTH_SHORT).show());
 
         ObserveAnyChange();
     } //end onCreate
@@ -253,44 +255,6 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
                     Log.i(TAG, "Error in updating db for user: " + task.getException());
                 }
             });
-//            DatabaseReference moviesDbSnapshot = DatabaseInstance.DATABASE.getReference().child("users").child("likedMovies");
-//            moviesDbSnapshot.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    if(isMovieLiked){
-//                        int existingLikes = 0;
-//                        try {
-//                            existingLikes = snapshot.child("likes").getValue(Integer.class);
-//                        } catch (NullPointerException e){
-//                            e.printStackTrace();
-//                        } //end catch
-//                        Log.i(TAG, "Existing likes "+existingLikes+" will be updated to "+ (existingLikes + 1));
-//                        moviesDbSnapshot.child("likes").setValue(existingLikes+1);
-//
-//
-//                        if (existingLikes+1 == 5){
-//                            sendNotification(movie.getTitle());
-//                        } //end if
-//                    } //end if
-//
-//                    if(isMovieDisliked){
-//                        int existingDislikes = 0;
-//                        try {
-//                            existingDislikes = snapshot.child("dislikes").getValue(Integer.class);
-//                        } catch (NullPointerException e){
-//                            e.printStackTrace();
-//                        } //end catch
-//                        Log.i(TAG, "Existing dislikes "+existingDislikes+" will be updated to "+ (existingDislikes + 1));
-//                        moviesDbSnapshot.child("dislikes").setValue(existingDislikes+1);
-//                    } //end if
-//                    Log.i(TAG, "Likes/Dislikes updated");
-//                } //end onDataChange
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//                    Log.e(TAG, "Unable to fetch like/dislike count. Likes/Dislikes not updated");
-//                } //end onCancelled
-//            });
         });
 
 //        mMovies.clear();

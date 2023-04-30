@@ -20,6 +20,8 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import com.example.cinewatch20.service.model.WatchProviders;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class MovieItem implements Serializable {
     private final int id;
     private final String title;
     private final List<String> genres;
+    private final List<WatchProviders.Provider> providers;
     private String poster_path;
     private String description;
     private String trailerID;
@@ -43,13 +46,14 @@ public class MovieItem implements Serializable {
     public boolean selected = false; // For UI selection. Default item is not selected.
 
     private MovieItem() {
-        this(0, "", new ArrayList<>(), "", "", "", "", 0,0);
+        this(0, "", new ArrayList<>(), null, "", "", "", "", 0,0);
     }
 
-    public MovieItem(int id, String title, List<String> genres, String poster_path, String description, String trailerID, String backdrop_path, Integer likes, Integer dislikes) {
+    public MovieItem(int id, String title, List<String> genres, List<WatchProviders.Provider> providers, String poster_path, String description, String trailerID, String backdrop_path, Integer likes, Integer dislikes) {
         this.id = id;
         this.title = title;
         this.genres = genres;
+        this.providers = providers;
         this.poster_path = poster_path;
         this.description = description;
         this.trailerID = trailerID;
@@ -94,6 +98,10 @@ public class MovieItem implements Serializable {
 
     public List<String> getGenres() {
         return genres;
+    }
+
+    public List<WatchProviders.Provider> getProviders() {
+        return providers;
     }
 
     public String getPoster_path() {
@@ -144,54 +152,6 @@ public class MovieItem implements Serializable {
         this.dislikes = Math.max(0, dislikes+delta);
     }
 
-//    @RequiresApi(api = Build.VERSION_CODES.Q)
-//    protected MovieItem(Parcel in) {
-//        title = in.readString();
-//        imageUrl = in.readString();
-//        wallPaperUrl = in.readString();
-//        id = in.readInt();
-//        description = in.readString();
-//        likes = in.readInt();
-//        dislikes = in.readInt();
-//        selected = in.readBoolean();
-//        genres = in.createStringArrayList();
-//    }
-//
-//    public static final Creator<MovieItem> CREATOR = new Creator<MovieItem>() {
-//        @RequiresApi(api = Build.VERSION_CODES.Q)
-//        @Override
-//        public MovieItem createFromParcel(Parcel in) {
-//            return new MovieItem(in);
-//        }
-//
-//        @Override
-//        public MovieItem[] newArray(int size) {
-//            return new MovieItem[size];
-//        }
-//    };
-//
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//
-//
-//    @RequiresApi(api = Build.VERSION_CODES.Q)
-//    @Override
-//    public void writeToParcel(@NonNull Parcel parcel, int i) {
-//        parcel.writeString(title);
-//        parcel.writeString(imageUrl);
-//        parcel.writeInt(id);
-//        parcel.writeString(String.valueOf(genres));
-//        parcel.writeString(description);
-//        parcel.writeString(trailerID);
-//        parcel.writeString(wallPaperUrl);
-//        parcel.writeInt(likes);
-//        parcel.writeInt(dislikes);
-//        parcel.writeBoolean(selected);
-//
-//    }
 
 
 } //end class

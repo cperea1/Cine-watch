@@ -14,7 +14,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.cinewatch20.database.DatabaseInstance;
 import com.example.cinewatch20.service.model.Genre;
 import com.example.cinewatch20.service.model.MovieDetails;
-import com.example.cinewatch20.service.model.Result;
+import com.example.cinewatch20.service.model.VideoResults;
+import com.example.cinewatch20.service.model.WatchProviders;
 import com.example.cinewatch20.utils.MovieDetailsServiceUtil;
 import com.example.cinewatch20.utils.TmdbIdMapper;
 import com.google.firebase.database.DataSnapshot;
@@ -77,6 +78,7 @@ public class MovieDetailsService extends Service {
                     if(snapshot.hasChild(tmdbId+"")){
                         //Log.d(TAG, "Movie exists in DB. Fetching details for "+tmdbId);
                         MovieDetails md = mapDataToMovieDetails(tmdbId, snapshot.child(tmdbId+""));
+
                         moviesInDatabase.add(md);
 
                     } else {
@@ -97,7 +99,7 @@ public class MovieDetailsService extends Service {
             }
         });
     }
-
+// i think i have to add subscriptions to this list below
     private MovieDetails mapDataToMovieDetails(int tmdbId, DataSnapshot snapshot){
         MovieDetails md = new MovieDetails();
         md.setId(tmdbId);
@@ -108,7 +110,19 @@ public class MovieDetailsService extends Service {
         md.setTrailer(snapshot.child("trailer").getValue(String.class));
         md.setLikes(snapshot.child("likes").getValue(Integer.class));
         md.setDislikes(snapshot.child("dislikes").getValue(Integer.class));
+
+        List<WatchProviders.Provider> providersList = new ArrayList<>();
+
+        DataSnapshot providerSnapshot = snapshot.child("providers");
+        for (DataSnapshot provider : providerSnapshot.getChildren()) {
+            WatchProviders.Provider providerObj = provider.getValue(WatchProviders.Provider.class);
+            providersList.add(providerObj);
+        }
+
+        md.setProviders(providersList);
+
         String genres = snapshot.child("genres").getValue(String.class);
+
         if(genres != null){
             List<Genre> genreList = new ArrayList<>();
             for(String genre: genres.split(",")){
@@ -116,7 +130,7 @@ public class MovieDetailsService extends Service {
             }
             md.setGenres(genreList);
         }
-        Log.d(TAG, "Movie mapped: "+md);
+        //Log.d(TAG, "Movie mapped: "+md);
         return md;
     }
 
@@ -133,6 +147,8 @@ public class MovieDetailsService extends Service {
                     Log.d(TAG, "Fetching details for tmdb id "+tmdbId+" on thread "+Thread.currentThread().getName());
                     MovieDetails response = future.get(60, TimeUnit.SECONDS);
                     Log.i(TAG, "Got response : " + response);
+                    response.setProviders(response.getWatchProviders().getProviderInfoForRegion("US").getFlatrateProviders());
+
                     insertMovieDetailsInDatabase(response);
                     movieDetails.add(response);
                 } catch (Exception e) {
@@ -140,7 +156,7 @@ public class MovieDetailsService extends Service {
                     e.printStackTrace();
                 }
             });
-            thread.start();
+            thread.start(); //just calls the thread from above
         }
 
         Log.i(TAG, "Updated database with missing tmdb ids");
@@ -154,6 +170,7 @@ public class MovieDetailsService extends Service {
         childRef.child("backdrop").setValue(response.getBackDrop());
         childRef.child("likes").setValue(0);
         childRef.child("dislikes").setValue(0);
+        childRef.child("providers").setValue(response.getProviders());
         StringBuilder sb= new StringBuilder();
         response.getGenres().forEach(m -> sb.append(m).append(","));
         if(sb.length()>0)
@@ -161,7 +178,7 @@ public class MovieDetailsService extends Service {
         childRef.child("genres").setValue(sb.toString());
 
         String trailerLink = "";
-        List<Result> results = response.getVideos().getResults();
+        List<VideoResults> results = response.getVideos().getResults();
         for (int i = 0; i < results.size(); i++){
             String type = results.get(i).getType();
             String site = results.get(i).getSite();

@@ -1,12 +1,13 @@
 package com.example.cinewatch20.models;
 
+import androidx.annotation.NonNull;
+
 import com.example.cinewatch20.data.MovieItem;
-import com.example.cinewatch20.service.model.MovieDetails;
-import com.example.cinewatch20.utils.MovieDetailsServiceUtil;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,27 +17,24 @@ import java.util.stream.Collectors;
 public class User implements Serializable {
     private String id;
     private String name;
-    private String age;
+    private int age;
+//    private String bday;
     private String contact;
     private String email;
     private String username;
     private String password;
+    private String gender;
     private List<MovieItem> likedMovies = new ArrayList<>();
     private List<MovieItem> dislikedMovies = new ArrayList<>();
     private List<MovieItem> bookmarkedMovies = new ArrayList<>();
+    private List<String> subscriptions = new ArrayList<>();
 
     public User(){}
-
-    public User(String id, String name, String age, String contact, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.contact = contact;
-    }
 
     public User(String id, String name, String username, String email, String password){
         this.id = id;
         this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
 
@@ -58,11 +56,21 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getAge() {
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+
+
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -122,6 +130,10 @@ public class User implements Serializable {
         this.likedMovies.addAll(likedMovieItems);
     }
 
+    public void emptyLikedMovies() {
+        this.likedMovies = new ArrayList<>();
+    }
+
     public List<MovieItem> getDislikedMovies() {
         return dislikedMovies;
     }
@@ -134,6 +146,10 @@ public class User implements Serializable {
     public void removeDislikedMovie(int movieItemId){
         this.dislikedMovies = this.dislikedMovies.stream()
                 .filter(movie -> movieItemId != movie.getId()).collect(Collectors.toList());
+    }
+
+    public void emptyDislikedMovies() {
+        this.dislikedMovies = new ArrayList<>();
     }
 
     public List<MovieItem> getBookmarkedMovies() {
@@ -150,6 +166,30 @@ public class User implements Serializable {
                 .filter(movie -> movieItemId != movie.getId()).collect(Collectors.toList());
     }
 
+    public void emptyBookmarkedMovies() {
+        this.bookmarkedMovies = new ArrayList<>();
+    }
+
+    public List<String> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(List<String> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+
+    public void addSubscription(String sub) {
+        this.subscriptions.add(sub);
+    }
+
+    public void removeSubscription(String sub){
+        this.subscriptions = this.subscriptions.stream()
+                .filter(s -> !s.equals(sub)).collect(Collectors.toList());
+    }
+
+    public void emptySubscriptions() {
+        this.subscriptions = new ArrayList<>();
+    }
 
 
     @Override
@@ -157,14 +197,16 @@ public class User implements Serializable {
         return "User{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", age='" + age + '\'' +
+                ", age=" + age +
                 ", contact='" + contact + '\'' +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", dislikedMovies='" + dislikedMovies + '\'' +
-                ", bookmarkedMovies='" + bookmarkedMovies + '\'' +
+                ", gender='" + gender + '\'' +
                 ", likedMovies=" + likedMovies +
+                ", dislikedMovies=" + dislikedMovies +
+                ", bookmarkedMovies=" + bookmarkedMovies +
+                ", subscriptions=" + subscriptions +
                 '}';
     }
 }

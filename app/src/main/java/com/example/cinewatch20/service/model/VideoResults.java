@@ -1,6 +1,6 @@
 package com.example.cinewatch20.service.model;
 
-public class Result {
+public class VideoResults {
 
     private String key;
     private String site;

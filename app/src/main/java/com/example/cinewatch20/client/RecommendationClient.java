@@ -200,7 +200,7 @@ public class RecommendationClient implements Serializable {
             }
             Result result = new Result(id, item, confidences[i]);
             results.add(result);
-            Log.v(TAG, String.format("Inference output[%d]. Result: %s", i, result));
+            //Log.v(TAG, String.format("Inference output[%d]. Result: %s", i, result));
         }
 
         return results;

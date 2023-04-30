@@ -21,7 +21,8 @@ public class MovieDetailsServiceUtil {
         builder.setHost(Credentials.TMDB_HOST_URL);
         builder.setPath(Credentials.MOVIE_PATH+"/"+tmdbId);
         builder.addParameter(Credentials.API_KEY_PARAM, Credentials.API_KEY);
-        builder.addParameter(Credentials.VIDEOS_PARAM, Credentials.VIDEOS);
+        builder.addParameter(Credentials.APPEND_TO_RESPONSE, Credentials.VIDEOS);
+
 
         String url = "";
         try {
@@ -29,6 +30,8 @@ public class MovieDetailsServiceUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        url = url + "," + Credentials.WATCH_PROVIDERS;
         Log.d(TAG, "Url for movie details formed: "+url);
         return url;
     }
@@ -37,8 +40,9 @@ public class MovieDetailsServiceUtil {
     public static List<MovieItem> DetailsToItem(List<MovieDetails> movieDetails){
         List<MovieItem> movieItems = new ArrayList<>();
         for(MovieDetails md : movieDetails){
-            movieItems.add(new MovieItem(md.getId(), md.getTitle(), md.getGenres(), md.getPoster(), md.getOverview(), md.getTrailer(), md.getBackDrop(), md.getLikes(), md.getDislikes()));
+            movieItems.add(new MovieItem(md.getId(), md.getTitle(), md.getGenres(), md.getProviders(), md.getPoster(), md.getOverview(), md.getTrailer(), md.getBackDrop(), md.getLikes(), md.getDislikes()));
         }
+
         return movieItems;
     }
 
