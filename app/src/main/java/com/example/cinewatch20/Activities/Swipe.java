@@ -39,7 +39,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 
@@ -112,25 +111,13 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
             public void onClick(View view) {
                 // Perform your action here
 
-                Intent intent = new Intent(Swipe.this, MovieListActivity.class);
+                Intent intent = new Intent(Swipe.this, Search.class);
                 intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
                 startActivity(intent);
 
             }
         });
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Perform your action here
 
-//                Intent intent = new Intent(Swipe.this, InfoPage.class);
-//                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
-//                startActivity(intent);
-
-                Toast.makeText(Swipe.this,"Info Page",Toast.LENGTH_SHORT).show();
-
-            }
-        });
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,17 +136,11 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
             public void onClick(View view) {
                 // Perform your action here
 
-//                Intent intent = new Intent(Swipe.this, AccountPage.class);
-//                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
-//                startActivity(intent);
-
-                Toast.makeText(Swipe.this,"Temp: sign out",Toast.LENGTH_SHORT).show();
-
-                //use this sign out code for later!!
-                ((CineWatchApplication) getApplication()).setActiveSessionUser(null);
-                Intent intent = new Intent(Swipe.this, LoginScreen.class);
-                intent.putExtra("logged out", true);
+                Intent intent = new Intent(Swipe.this, Account.class);
+                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
                 startActivity(intent);
+
+
 
             }
         });
@@ -281,6 +262,21 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
                             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + videoId));
                             intent.putExtra("VIDEO_ID", videoId);
                             startActivity(intent);
+                        }
+                    });
+
+                    infoButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // Perform your action here
+
+//                            Intent intent = new Intent(Swipe.this, InfoPage.class);
+//                            intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
+//                            intent.putExtra(Credentials.ACTIVE_MOVIE_KEY, mMovies.get(0).getId());
+//                            startActivity(intent);
+
+                            Toast.makeText(Swipe.this,"Info Page",Toast.LENGTH_SHORT).show();
+
                         }
                     });
 

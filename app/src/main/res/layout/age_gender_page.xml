@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FF7900"
+    android:background="@color/pink1"
     tools:context=".Activities.NewAccountPage"
     android:transitionName="filmTransition"
     android:padding="20dp">
@@ -21,10 +21,12 @@
         android:paddingTop="200dp"
         android:orientation="vertical">
 
+
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="61dp"
+            android:background="@drawable/spinner_outline"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -57,14 +59,12 @@
     </LinearLayout>
 
 
-
-
     <Button
         android:id="@+id/next2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="97dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/teal_700"
+        android:background="@drawable/rounded_rectangle"
         android:elevation="20dp"
         android:fontFamily="@font/aclonica_regular"
         android:text="@string/next"

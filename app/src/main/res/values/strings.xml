@@ -27,5 +27,20 @@
     <string name="trailer">trailer</string>
     <string name="save">save</string>
     <string name="account">account</string>
+    <string name="search_movies">Search Movies</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="firstname_lastname">FIRSTNAME LASTNAME</string>
+    <string name="update_movie_subscriptions">UPDATE MOVIE SUBSCRIPTIONS</string>
+    <string name="home">Home</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="rating">Rating</string>
+    <string name="movie_actors">Movie Actors</string>
+    <string name="movie_bio">Movie Bio</string>
+    <string name="movie_platforms">Movie Platforms</string>
+    <string name="add_to_bookmarks_button">Add to Bookmarks Button</string>
+    <string name="Start_New_here">New User Signup</string>
+    <string name="cardstack">cardstack</string>
 
 </resources>

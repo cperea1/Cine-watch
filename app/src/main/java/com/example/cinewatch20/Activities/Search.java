@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -26,10 +28,9 @@ import com.example.cinewatch20.models.User;
 import com.example.cinewatch20.utils.Credentials;
 import com.example.cinewatch20.viewModels.MovieListViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListActivity extends AppCompatActivity implements OnMovieListener {
+public class Search extends AppCompatActivity implements OnMovieListener {
 
     private static final String TAG = "CineWatch - MovieListActivity";
     //Recycler View
@@ -60,12 +61,13 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Perform your action here
 
-                Intent intent = new Intent(MovieListActivity.this, Swipe.class);
+                Intent intent = new Intent(Search.this, Swipe.class);
                 intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
                 startActivity(intent);
 

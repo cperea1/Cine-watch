@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MovieListActivity"
+            android:name=".Activities.Search"
             android:exported="false" />
         <activity
             android:name=".Activities.NewAccountPage"
@@ -41,6 +41,19 @@
         <activity
             android:name=".Activities.GenderAge"
             android:exported="false"/>
+        <activity
+            android:name=".Activities.Account"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Subscriptions"
+            android:exported="false"/>
+        <activity
+            android:name=".Activities.InfoPage"
+            android:exported="false"/>
+        <activity
+            android:name=".Activities.Bookmarks"
+            android:exported="false"/>
+
 
         <service
             android:name=".service.MovieDetailsService"

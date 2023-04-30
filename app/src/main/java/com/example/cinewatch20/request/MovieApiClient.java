@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.cinewatch20.Activities.InfoPage;
 import com.example.cinewatch20.AppExecutors;
 import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.response.MovieSearchResponse;
@@ -87,6 +88,26 @@ public class MovieApiClient {
 
     } //end getPopular
 
+    public void searchByID(int id) {
+
+        if (movieQueryRunnable != null) movieQueryRunnable = null;
+
+        movieQueryRunnable = new MovieQueryRunnable( "search by id", id);
+
+        final Future myHandler = AppExecutors.getInstance().networkIO().submit(movieQueryRunnable);
+
+        AppExecutors.getInstance().networkIO().schedule(new Runnable() {
+            @Override
+            public void run() {
+                //cancelling
+                myHandler.cancel(true);
+
+                return;
+            }
+        },3000, TimeUnit.MILLISECONDS);
+
+    } //end getPopular
+
 
 
 
@@ -109,6 +130,7 @@ public class MovieApiClient {
         public MovieQueryRunnable(String queryType, int movie_id) {
             this.queryType = queryType;
             this.movie_id = movie_id;
+            pageNumber = 1;
             this.cancelRequest = false;
         }
 
@@ -131,16 +153,9 @@ public class MovieApiClient {
                             return;
                         } //end if
 
-                        if (response.code() == 200) {
-                            List<MovieItem> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
-                    if (pageNumber == 1) {
-                        mMovies.postValue(list);
-                    } //end if
-                    else {
-                        List<MovieItem> currentMovies  = mMovies.getValue();
-                        currentMovies.addAll(list);
-                        mMovies.postValue(currentMovies);
-                    } //end else
+                        if (response.code() == 200) { //200 means it worked
+                            MovieItem movieItem = (MovieItem) response.body();
+                            InfoPage.movieItem = movieItem;
                         } //end if
                         else {
                             String error = response.errorBody().string();

@@ -45,7 +45,7 @@ public class LoginScreen extends AppCompatActivity {
         //my new account page the signup.
         buttonSignup = findViewById(R.id.sign_up);
         editTextEmail = findViewById(R.id.email);
-        editTextPassword = findViewById(R.id.password);
+        editTextPassword = findViewById(R.id.login_password);
 
         //Hooks for animations
 

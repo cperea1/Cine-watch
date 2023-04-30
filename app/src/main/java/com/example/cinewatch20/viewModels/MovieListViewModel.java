@@ -35,4 +35,8 @@ public class MovieListViewModel extends ViewModel {
     public void setmMovies(List<MovieItem> mMovies) {
         movieRepository.setmMovies(mMovies);
     }
+
+    public void searchByID(int id) {
+        movieRepository.searchByID(id);
+    }
 } //end class

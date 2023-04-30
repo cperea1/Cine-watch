@@ -28,7 +28,7 @@ public class GenderAge extends AppCompatActivity {
     String gender;
     EditText age;
     private String userId;
-    private String TAG = "CineWatch - GenderBday";
+    private final String TAG = "CineWatch - GenderBday";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -67,6 +67,12 @@ public class GenderAge extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (gender.equals("Choose Your Gender")) {
+                    Toast.makeText(GenderAge.this, "No Gender Selected", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 int Age = Integer.parseInt(age.getText().toString());
 
                 activeUser.setGender(gender);

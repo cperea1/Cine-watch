@@ -2,39 +2,42 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00A0A2">
+    tools:context=".Activities.Logo"
+    android:background="@color/pink1">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/camera"
-        android:transitionName="logo_image"
-        android:layout_width="457dp"
-        android:layout_height="274dp"
+        android:layout_width="272dp"
+        android:layout_height="280dp"
+        android:layout_margin="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="462dp"
-        android:src="@drawable/camera"
+        android:contentDescription="@string/camera_picture"
+        android:transitionName="logo_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:contentDescription="@string/camera_picture"/>
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+        app:srcCompat="@drawable/camera" />
 
     <TextView
         android:id="@+id/opening_title"
         android:transitionName="logo_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="70dp"
         android:fontFamily="@font/aclonica_regular"
         android:textColor="#000"
         android:text="@string/cinewatch"
         android:textAlignment="center"
-        android:textSize="65dp"
+        android:textSize="65sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera" />
 

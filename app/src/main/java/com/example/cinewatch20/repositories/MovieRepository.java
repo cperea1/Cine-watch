@@ -41,4 +41,8 @@ public class MovieRepository {
     public void setmMovies(List<MovieItem> mMovies) {
         movieApiClient.setmMovies(mMovies);
     }
+
+    public void searchByID(int id) {
+        movieApiClient.searchByID(id);
+    }
 } //end class
