@@ -22,4 +22,13 @@
     <string name="cardstack">cardstack</string>
     <string name="info">info</string>
     <string name="rating">rating</string>
+    <string name="Start_New_here">New Here ? Sign up !</string>
+    <string name="movie_actors">Movie Actors</string>
+    <string name="movie_bio">Movie Bio</string>
+    <string name="movie_platforms">Platforms</string>
+    <string name="add_to_bookmarks_button">Add to Bookmarks</string>
+    <string name="movie_poster">movie poster</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="update_movie_subscriptions">Update Movie Subscriptions</string>
+    <string name="select_your_subscription_options">Select your subscription options</string>
 </resources>

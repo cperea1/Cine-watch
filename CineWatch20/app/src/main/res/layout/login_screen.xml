@@ -24,11 +24,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="504dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/rounded_corner"
-        android:maxWidth="48dp"
+        android:minWidth="48dp"
         android:minHeight="60dp"
         android:orientation="vertical">
 
@@ -42,7 +42,8 @@
             android:textSize="40sp"
             android:transitionName="logo_text"
             android:paddingTop="10dp"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         <TextView
             android:id="@+id/slogan_name"
@@ -52,6 +53,7 @@
             android:text="@string/sign_in_to_continue"
             android:textColor="#000"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout

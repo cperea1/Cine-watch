@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/pink1"
+    tools:context=".Info">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/movie_poster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/movie_poster"/>
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@string/movie_title"
+            android:textColor="#000000" />
+
+        <RatingBar
+            android:id="@+id/movie_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:numStars="5"
+            android:stepSize="1"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:progressTint="@android:color/holo_orange_dark"
+            android:progressBackgroundTint="@android:color/darker_gray"
+            android:contentDescription="@string/rating" />
+
+        <TextView
+            android:id="@+id/movie_actors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/movie_actors" />
+
+        <TextView
+            android:id="@+id/movie_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/movie_bio" />
+
+        <TextView
+            android:id="@+id/movie_platforms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/movie_platforms" />
+
+        <Button
+            android:id="@+id/add_to_bookmarks_button"
+            android:layout_width="202dp"
+            android:layout_height="52dp"
+            android:layout_gravity="end"
+            android:background="@drawable/rounded_rectangle"
+
+            android:text="@string/add_to_bookmarks_button" />
+
+    </LinearLayout>
+
+</ScrollView>

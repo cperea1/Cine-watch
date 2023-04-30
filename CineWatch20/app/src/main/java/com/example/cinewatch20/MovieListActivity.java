@@ -2,8 +2,7 @@ package com.example.cinewatch20;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
+
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -21,7 +20,7 @@ import com.example.cinewatch20.Adapters.OnMovieListener;
 import com.example.cinewatch20.models.MovieModel;
 import com.example.cinewatch20.viewModels.MovieListViewModel;
 
-import java.util.List;
+
 
 public class MovieListActivity extends AppCompatActivity implements OnMovieListener {
 
@@ -48,15 +47,13 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Perform your action here
+        //end onclick
+        home.setOnClickListener(view -> {
+            // Perform your action here
 
-                Intent intent = new Intent(MovieListActivity.this, Swipe.class);
-                startActivity(intent);
+            Intent intent = new Intent(MovieListActivity.this, Swipe.class);
+            startActivity(intent);
 
-            } //end onclick
         });
 
 
@@ -94,20 +91,18 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
     }
 
     private void ObserveAnyChange() {
-        movieListViewModel.getMovies().observe(this, new Observer<List<MovieModel>>() {
-            @Override
-            public void onChanged(List<MovieModel> movieModels) {
-                if (movieModels != null) {
-                    for (MovieModel movieModel: movieModels) {
-                        Log.v("Tag", "onChanged: " + movieModel.getTitle());
-                    } //end for
+        //end onChanged
+        movieListViewModel.getMovies().observe(this, movieModels -> {
+            if (movieModels != null) {
+                for (MovieModel movieModel: movieModels) {
+                    Log.v("Tag", "onChanged: " + movieModel.getTitle());
+                } //end for
 
-                    movieRecyclerAdapter.setmMovies(movieModels);
-                    movieRecyclerAdapter.notifyDataSetChanged();
+                movieRecyclerAdapter.setmMovies(movieModels);
+                movieRecyclerAdapter.notifyDataSetChanged();
 
-                } //end if
-             } //end onChanged
-        });
+            } //end if
+         });
     } //end OAC -----good
 
     private void getPopular() {
@@ -122,7 +117,14 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
 
         recyclerView.setAdapter(movieRecyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+
+        //center contents vertically and horizontally
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+
     } //end CRV ----- good
 
     @Override
