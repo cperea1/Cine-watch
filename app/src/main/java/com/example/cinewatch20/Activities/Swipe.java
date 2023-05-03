@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,8 @@ import java.util.stream.Collectors;
 
 
 public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDetailsCallback {
-    private MovieAdapter arrayAdapter;
+    ProgressBar progressBar;
+    MovieAdapter arrayAdapter;
     List<MovieItem> mMovies;
     SwipeFlingAdapterView flingAdapterView;
     Button search_view, infoButton, saveButton, accountButton, neverSeenButton, trailerButton;
@@ -59,10 +61,9 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
     List<String> genres;
     private RecommendationClient client;
     private User activeUser;
-    private List<MovieItem> movies;
+    private List<MovieItem> likedMovies;
     private boolean isServiceConnected;
     private boolean recommendationsHaveBeenFetched;
-    private boolean isMovieLiked, isMovieDisliked, isMovieBookmarked;
     private MovieDetailsService movieDetailsService;
     private ServiceConnection serviceConnection;
     private MovieItem firstMovie;
@@ -77,6 +78,11 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         userId = this.getIntent().getStringExtra(Credentials.ACTIVE_USER_KEY);
         handler = new Handler();
         recommendations = new ArrayList<>();
+        // Initialize the progress bar or spinner widget
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
+
 
         try {
             config = FileUtil.loadConfig(this.getAssets(), CONFIG_PATH);
@@ -91,11 +97,10 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         recommendationsHaveBeenFetched = false;
         loadActiveUserFromDb(userId);
 
-
-
         mMovies = new ArrayList<>();
-        mMovies.add(new MovieItem(-1, "helper", null, null, "/oT8MbC0FuAcwZhuucO1YRRHcYSS.jpg", "Yes", "", "", 0, 0));
-
+        //not sure why but we need to add something to get anything to show up
+        mMovies.add(new MovieItem(-1, "helper", null, null, "/oT8MbC0FuAcwZhuucO1YRRHcYSS.jpg", "Yes", "", "", 0, 0.0f, "", "", 0, 0, false));
+        arrayAdapter = new MovieAdapter(getApplicationContext(), R.layout.movie_list_item, mMovies, onMovieListener);
         flingAdapterView= findViewById(R.id.card);
         search_view = findViewById(R.id.scroll_view);
         accountButton = findViewById(R.id.account);
@@ -121,13 +126,16 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Perform your action here
+                if (!activeUser.getBookmarkedMovies().contains(mMovies.get(0))) {
+                    activeUser.addBookmarkedMovies(mMovies.get(0));
+                    ((CineWatchApplication) getApplication()).setActiveSessionUser(activeUser);
+                    Toast.makeText(Swipe.this, mMovies.get(0).getTitle() + " Bookmarked",Toast.LENGTH_SHORT).show();
 
-//                Intent intent = new Intent(Swipe.this, SavesPage.class);
-//                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
-//                startActivity(intent);
 
-                Toast.makeText(Swipe.this,"Save Page",Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(Swipe.this, "Movie already bookmarked!", Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -145,59 +153,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
             }
         });
 
-//        neverSeenButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(Swipe.this,"Never Seen",Toast.LENGTH_SHORT).show();
-//                Log.v("Fling", "Movie Never Seen: " + mMovies.get(0));
-//
-//                mMovies.remove(0);
-//                arrayAdapter.getView(0, null, flingAdapterView);
-//                arrayAdapter.notifyDataSetChanged();
-//
-//            }
-//        });
 
-        arrayAdapter = new MovieAdapter(Swipe.this, R.layout.movie_list_item, mMovies, onMovieListener);
-
-        flingAdapterView.setAdapter(arrayAdapter);
-        flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            @Override
-            public void removeFirstObjectInAdapter() {
-                //work is done in swipe left and right
-            }
-
-            @Override
-            public void onLeftCardExit(Object o) {
-                Toast.makeText(Swipe.this,"dislike",Toast.LENGTH_SHORT).show();
-                Log.v("Fling", "Movie Disliked: " + mMovies.get(0));
-
-                activeUser.addDislikedMovieItem(mMovies.get(0));
-                mMovies.remove(0);
-                arrayAdapter.notifyDataSetChanged();
-
-            }
-            @Override
-            public void onRightCardExit(Object o) {
-                Toast.makeText(Swipe.this,"liked",Toast.LENGTH_SHORT).show();
-                Log.v("Fling", "Movie Liked: " + mMovies.get(0));
-                activeUser.addLikedMovieItem(mMovies.get(0));
-
-                mMovies.remove(0);
-                arrayAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int i) {
-
-            }
-
-            @Override
-            public void onScroll(float v) {
-
-            }
-        });
         //flingAdapterView.setOnItemClickListener((i, o) -> Toast.makeText(Swipe.this,"data is"+ mMovies.get(i),Toast.LENGTH_SHORT).show());
 
         ObserveAnyChange();
@@ -220,6 +176,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         super.onRestart();
 
         loadActiveUserFromDb(userId);
+        arrayAdapter = new MovieAdapter(Swipe.this, R.layout.movie_list_item, mMovies, onMovieListener);
     }
 
     @Override
@@ -270,10 +227,11 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
                         public void onClick(View view) {
                             // Perform your action here
 
-//                            Intent intent = new Intent(Swipe.this, InfoPage.class);
-//                            intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
-//                            intent.putExtra(Credentials.ACTIVE_MOVIE_KEY, mMovies.get(0).getId());
-//                            startActivity(intent);
+                            Intent intent = new Intent(Swipe.this, InfoPage.class);
+                            intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
+                            intent.putExtra(Credentials.ACTIVE_MOVIE_KEY, mMovies.get(0).getId());
+                            intent.putExtra("where", 1);
+                            startActivity(intent);
 
                             Toast.makeText(Swipe.this,"Info Page",Toast.LENGTH_SHORT).show();
 
@@ -314,7 +272,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
                     activeUser = task.getResult().getValue(User.class);
                     ((CineWatchApplication)getApplication()).setActiveSessionUser(activeUser);
                     Log.d(TAG, "User " + userId + " fetched from database: " + activeUser);
-                    movies = activeUser.getLikedMovies();
+                    likedMovies = activeUser.getLikedMovies();
                     executeRecommendationEngine();
                 } else {
                     Log.e(TAG, "Unable to fetch active user");
@@ -324,11 +282,11 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
     } //end method
 
     private void executeRecommendationEngine() {
-        movies = activeUser.getLikedMovies();
+        likedMovies = activeUser.getLikedMovies();
         Log.i(TAG, "Executing recommendation engine for selected movies");
         // Run inference with TF Lite.
         Log.d(TAG, "Run inference with TFLite model.");
-        recommendations = client.recommend(movies);
+        recommendations = client.recommend(likedMovies);
         Log.d(TAG, "Recommendations loaded");
         if (isServiceConnected && !recommendationsHaveBeenFetched) {
             Log.d(TAG, "Entered from db");
@@ -338,7 +296,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
 
     private void fetchMovieDetailsForRecommendations() {
         recommendationsHaveBeenFetched = true;
-        List<Integer> selectedMovies = movies.stream().map(MovieItem::getId).collect(Collectors.toList());
+        List<Integer> selectedMovies = likedMovies.stream().map(MovieItem::getId).collect(Collectors.toList());
         recommendations = recommendations.stream().filter(result -> !selectedMovies.contains(result.item.getId())).collect(Collectors.toList());
         Log.i(TAG, "Fetching movie details for all recommendations");
         movieDetailsService.getMoviesDetails(
@@ -383,21 +341,54 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
     public void dbMovieDetails(List<MovieItem> movieItems) {
         showResult(movieItems);
     }
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void showResult(List<MovieItem> recommendations) {
-
-
-        //loadMap(recommendations);
-        //movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
-        //mMovies = recommendations;
         movieListViewModel.setmMovies(recommendations);
+        progressBar.setVisibility(View.GONE);
 
+        arrayAdapter = new MovieAdapter(getApplicationContext(), R.layout.movie_list_item, mMovies, onMovieListener);
+
+        flingAdapterView.setAdapter(arrayAdapter);
+        flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+            @Override
+            public void removeFirstObjectInAdapter() {
+                //work is done in swipe left and right
+            }
+
+            @Override
+            public void onLeftCardExit(Object o) {
+                Toast.makeText(Swipe.this,"dislike",Toast.LENGTH_SHORT).show();
+                Log.v("Fling", "Movie Disliked: " + mMovies.get(0));
+
+                activeUser.addDislikedMovieItem(mMovies.get(0));
+                activeUser.removeLikedMovieItem(mMovies.get(0).getId());
+                mMovies.remove(0);
+                arrayAdapter.notifyDataSetChanged();
+
+            }
+            @Override
+            public void onRightCardExit(Object o) {
+                Toast.makeText(Swipe.this,"liked",Toast.LENGTH_SHORT).show();
+                Log.v("Fling", "Movie Liked: " + mMovies.get(0));
+                activeUser.addLikedMovieItem(mMovies.get(0));
+                activeUser.removeDislikedMovieItem(mMovies.get(0).getId());
+
+                mMovies.remove(0);
+                arrayAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onAdapterAboutToEmpty(int i) {
+
+            }
+
+            @Override
+            public void onScroll(float v) {
+
+            }
+        });
 
            } //end showResult
-
 
     @Override
     public void onDestroy() {
@@ -410,6 +401,5 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         this.unbindService(serviceConnection);
         serviceConnection = null;
         isServiceConnected = false;
-    }
-
+    } //end onDestroy
 } //end class

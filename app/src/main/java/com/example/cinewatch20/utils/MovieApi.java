@@ -1,6 +1,7 @@
 package com.example.cinewatch20.utils;
 
 import com.example.cinewatch20.data.MovieItem;
+import com.example.cinewatch20.response.MovieResponse;
 import com.example.cinewatch20.response.MovieSearchResponse;
 
 import retrofit2.Call;
@@ -21,7 +22,7 @@ public interface MovieApi {
 
     //Making search ith ID
     @GET("/3/movie/{movie_id}?")
-    Call<MovieItem> getMovie(
+    Call<MovieResponse> getMovie(
             @Path("movie_id") int movie_id,
             @Query("api_key") String key
             );

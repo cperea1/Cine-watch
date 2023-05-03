@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/pink1"
+    android:padding="20dp">
 
-    <Button
-        android:id="@+id/sign_up_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_movie_subscriptions"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_your_subscription_options"/>
+
+            <CheckBox
+                android:id="@+id/netflix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/netflix"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/hulu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/hulu"
+                app:layout_constraintTop_toBottomOf="@+id/netflix" />
+
+            <CheckBox
+                android:id="@+id/HBOMax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/hbo_max"
+                app:layout_constraintTop_toBottomOf="@+id/hulu" />
+
+            <CheckBox
+                android:id="@+id/disney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/disney"
+                app:layout_constraintTop_toBottomOf="@+id/HBOMax" />
+
+            <CheckBox
+                android:id="@+id/peacock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="120dp"
+                android:text="@string/peacock"
+                app:layout_constraintTop_toBottomOf="@+id/disney" />
+
+            <CheckBox
+                android:id="@+id/paramount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="120dp"
+                android:text="@string/paramount"
+                app:layout_constraintTop_toBottomOf="@+id/peacock" />
+            <CheckBox
+                android:id="@+id/showtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="120dp"
+                android:text="@string/showtime"
+                app:layout_constraintTop_toBottomOf="@+id/paramount" />
+
+            <CheckBox
+                android:id="@+id/primevideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="120dp"
+                android:text="@string/prime_video"
+                app:layout_constraintTop_toBottomOf="@+id/showtime" />
+
+            <CheckBox
+                android:id="@+id/crunchyroll"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:text="@string/crunchyroll"
+                app:layout_constraintTop_toBottomOf="@+id/primevideo" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonUpdate"
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_rectangle"
+            android:elevation="20dp"
+            android:fontFamily="@font/aclonica_regular"
+            android:layout_gravity="center"
+            android:text="@string/update"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
 </LinearLayout>

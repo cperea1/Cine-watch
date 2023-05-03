@@ -12,10 +12,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 import com.example.cinewatch20.database.DatabaseInstance;
-import com.example.cinewatch20.service.model.Genre;
 import com.example.cinewatch20.service.model.MovieDetails;
 import com.example.cinewatch20.service.model.VideoResults;
-import com.example.cinewatch20.service.model.WatchProviders;
 import com.example.cinewatch20.utils.MovieDetailsServiceUtil;
 import com.example.cinewatch20.utils.TmdbIdMapper;
 import com.google.firebase.database.DataSnapshot;
@@ -77,7 +75,7 @@ public class MovieDetailsService extends Service {
                 for(int tmdbId: tmdbIds){
                     if(snapshot.hasChild(tmdbId+"")){
                         //Log.d(TAG, "Movie exists in DB. Fetching details for "+tmdbId);
-                        MovieDetails md = mapDataToMovieDetails(tmdbId, snapshot.child(tmdbId+""));
+                        MovieDetails md = MovieDetailsServiceUtil.mapDataToMovieDetails(tmdbId, snapshot.child(tmdbId+""));
 
                         moviesInDatabase.add(md);
 
@@ -99,44 +97,9 @@ public class MovieDetailsService extends Service {
             }
         });
     }
-// i think i have to add subscriptions to this list below
-    private MovieDetails mapDataToMovieDetails(int tmdbId, DataSnapshot snapshot){
-        MovieDetails md = new MovieDetails();
-        md.setId(tmdbId);
-        md.setOverview(snapshot.child("overview").getValue(String.class));
-        md.setTitle(snapshot.child("title").getValue(String.class));
-        md.setPoster(snapshot.child("poster").getValue(String.class));
-        md.setBackDrop(snapshot.child("backdrop").getValue(String.class));
-        md.setTrailer(snapshot.child("trailer").getValue(String.class));
-        md.setLikes(snapshot.child("likes").getValue(Integer.class));
-        md.setDislikes(snapshot.child("dislikes").getValue(Integer.class));
-
-        List<WatchProviders.Provider> providersList = new ArrayList<>();
-
-        DataSnapshot providerSnapshot = snapshot.child("providers");
-        for (DataSnapshot provider : providerSnapshot.getChildren()) {
-            WatchProviders.Provider providerObj = provider.getValue(WatchProviders.Provider.class);
-            providersList.add(providerObj);
-        }
-
-        md.setProviders(providersList);
-
-        String genres = snapshot.child("genres").getValue(String.class);
-
-        if(genres != null){
-            List<Genre> genreList = new ArrayList<>();
-            for(String genre: genres.split(",")){
-                genreList.add(new Genre(genre));
-            }
-            md.setGenres(genreList);
-        }
-        //Log.d(TAG, "Movie mapped: "+md);
-        return md;
-    }
 
     public void fetchDetailsFromTmdb(List<Integer> tmdbIds) {
         Log.d(TAG, "fetchDetailsFromTmdb invoked");
-        List<MovieDetails> movieDetails = new ArrayList<>();
 
         for(int tmdbId : tmdbIds){
             Thread thread = new Thread(() -> {
@@ -146,11 +109,11 @@ public class MovieDetailsService extends Service {
                 try {
                     Log.d(TAG, "Fetching details for tmdb id "+tmdbId+" on thread "+Thread.currentThread().getName());
                     MovieDetails response = future.get(60, TimeUnit.SECONDS);
-                    Log.i(TAG, "Got response : " + response);
-                    response.setProviders(response.getWatchProviders().getProviderInfoForRegion("US").getFlatrateProviders());
 
+                    response.setProviders(response.getWatchProviders().getProviderInfoForRegion("US").getFlatrateProviders());
+                    Log.i(TAG, "Got response : " + response);
                     insertMovieDetailsInDatabase(response);
-                    movieDetails.add(response);
+
                 } catch (Exception e) {
                     Log.e(TAG, "unable to call tmdb: " + e.getMessage());
                     e.printStackTrace();
@@ -166,11 +129,16 @@ public class MovieDetailsService extends Service {
         DatabaseReference childRef = DatabaseInstance.DATABASE.getReference("movies").child(response.getId()+"");
         childRef.child("overview").setValue(response.getOverview());
         childRef.child("title").setValue(response.getTitle());
-        childRef.child("poster").setValue(response.getPoster());
-        childRef.child("backdrop").setValue(response.getBackDrop());
+        childRef.child("poster_path").setValue(response.getPoster_path());
+        childRef.child("backdrop_path").setValue(response.getBackdrop_path());
         childRef.child("likes").setValue(0);
         childRef.child("dislikes").setValue(0);
         childRef.child("providers").setValue(response.getProviders());
+        childRef.child("runtime").setValue(response.getRuntime());
+        childRef.child("vote_average").setValue(response.getVote_average());
+        childRef.child("release_date").setValue(response.getRelease_date());
+        childRef.child("tagline").setValue(response.getTagline());
+
         StringBuilder sb= new StringBuilder();
         response.getGenres().forEach(m -> sb.append(m).append(","));
         if(sb.length()>0)

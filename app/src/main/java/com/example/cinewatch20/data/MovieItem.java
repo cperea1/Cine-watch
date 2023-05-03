@@ -38,30 +38,70 @@ public class MovieItem implements Serializable {
     private final List<String> genres;
     private final List<WatchProviders.Provider> providers;
     private String poster_path;
-    private String description;
+    private String overview;
     private String trailerID;
+    private String release_date;
+    private int runtime;
+    private float vote_average;
+    private String tagline;
     private String backdrop_path;
     private int likes;
     private int dislikes;
     public boolean selected = false; // For UI selection. Default item is not selected.
 
     private MovieItem() {
-        this(0, "", new ArrayList<>(), null, "", "", "", "", 0,0);
+        this(0, "", new ArrayList<>(), new ArrayList<>(), "", "", "", "", 0,0.0f, "", "", 0, 0, false);
     }
 
-    public MovieItem(int id, String title, List<String> genres, List<WatchProviders.Provider> providers, String poster_path, String description, String trailerID, String backdrop_path, Integer likes, Integer dislikes) {
+    public MovieItem(int id, String title, List<String> genres, List<WatchProviders.Provider> providers, String poster_path, String overview, String trailerID, String release_date, int runtime, float vote_average, String tagline, String backdrop_path, int likes, int dislikes, boolean selected) {
         this.id = id;
         this.title = title;
         this.genres = genres;
         this.providers = providers;
         this.poster_path = poster_path;
-        this.description = description;
+        this.overview = overview;
         this.trailerID = trailerID;
+        this.release_date = release_date;
+        this.runtime = runtime;
+        this.vote_average = vote_average;
+        this.tagline = tagline;
         this.backdrop_path = backdrop_path;
-        this.likes = likes==null? 0 : likes;
-        this.dislikes = dislikes==null? 0 : dislikes;
+        this.likes = likes;
+        this.dislikes = dislikes;
+        this.selected = selected;
     }
 
+    public String getRelease_date() {
+        return release_date;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public float getVote_average() {
+        return vote_average;
+    }
+
+    public void setVote_average(float vote_average) {
+        this.vote_average = vote_average;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public void setTagline(String tagline) {
+        this.tagline = tagline;
+    }
 
     public String getTrailerID() {
         return trailerID;
@@ -79,13 +119,25 @@ public class MovieItem implements Serializable {
         this.backdrop_path = backdrop_path;
     }
 
-    @SuppressLint("DefaultLocale")
-    @NonNull
     @Override
     public String toString() {
-        return String.format(
-                "Id: %d, title: %s, genres: %s, imageURL: %s",
-                id, title, TextUtils.join(JOINER, genres), poster_path);
+        return "MovieItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", genres=" + genres +
+                ", providers=" + providers +
+                ", poster_path='" + poster_path + '\'' +
+                ", overview='" + overview + '\'' +
+                ", trailerID='" + trailerID + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", runtime=" + runtime +
+                ", vote_average=" + vote_average +
+                ", tagline='" + tagline + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
+                ", likes=" + likes +
+                ", dislikes=" + dislikes +
+                ", selected=" + selected +
+                '}';
     }
 
     public int getId() {
@@ -112,12 +164,12 @@ public class MovieItem implements Serializable {
         this.poster_path = poster_path;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public boolean isSelected() {

@@ -29,7 +29,7 @@ public class Account extends AppCompatActivity {
      Button mBackButton;
      TextView mTextView;
      Button mLogoutButton;
-     CardView search_movies_button, updateSubs, helpCard, settingsCard;
+     CardView search_movies_button, updateSubs, likedMoviesButton;
      ConstraintLayout mCardConstraintLayout;
      TextView firstname_lastname;
      TextView user_name;
@@ -57,6 +57,7 @@ public class Account extends AppCompatActivity {
         //cards in center
         search_movies_button = findViewById(R.id.search_movies_button);
         updateSubs = findViewById(R.id.updatesubs);
+        likedMoviesButton = findViewById(R.id.liked_movies_button);
 
         firstname_lastname = findViewById(R.id.firstname_lastname);
         user_name = findViewById(R.id.user_name);
@@ -130,6 +131,15 @@ public class Account extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Account.this, Subscriptions.class);
+                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
+                startActivity(intent);
+            }
+        });
+
+        likedMoviesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Account.this, LikedMovies.class);
                 intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
                 startActivity(intent);
             }

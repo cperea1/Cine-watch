@@ -8,8 +8,14 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.cinewatch20.Activities.InfoPage;
 import com.example.cinewatch20.AppExecutors;
 import com.example.cinewatch20.data.MovieItem;
+import com.example.cinewatch20.database.DatabaseInstance;
+import com.example.cinewatch20.response.MovieResponse;
 import com.example.cinewatch20.response.MovieSearchResponse;
+import com.example.cinewatch20.service.MovieDetailsService;
+import com.example.cinewatch20.service.model.MovieDetails;
+import com.example.cinewatch20.service.model.VideoResults;
 import com.example.cinewatch20.utils.Credentials;
+import com.google.firebase.database.DatabaseReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,12 +27,14 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class MovieApiClient {
+    MovieDetailsService service;
     //Live Data
     private MutableLiveData<List<MovieItem>> mMovies;
 
     private static MovieApiClient instance;
 
     private MovieQueryRunnable movieQueryRunnable;
+    private final String TAG = "CineWatch - MoveApiClient";
 
     public static MovieApiClient getInstance() {
         if (instance == null) {
@@ -114,7 +122,7 @@ public class MovieApiClient {
     private class MovieQueryRunnable implements Runnable {
 
         private String query;
-        private String queryType;
+        private final String queryType;
         private int pageNumber;
         boolean cancelRequest;
 
@@ -148,17 +156,21 @@ public class MovieApiClient {
                 case "search by id":
 
                     try {
-                        Response response =  getMovies(movie_id).execute();
+                        Response<MovieResponse> response =  getMovies(movie_id).execute();
                         if (cancelRequest) {
                             return;
                         } //end if
 
                         if (response.code() == 200) { //200 means it worked
-                            MovieItem movieItem = (MovieItem) response.body();
-                            InfoPage.movieItem = movieItem;
+                            if (response.body() != null) {
+                                //InfoPage.movieItem = ((MovieResponse) response.body()).getMovie();
+                            }
                         } //end if
                         else {
-                            String error = response.errorBody().string();
+                            String error = null;
+                            if (response.errorBody() != null) {
+                                error = response.errorBody().string();
+                            }
                             Log.v("Tag", "Error " + error);
                             mMovies.postValue(null);
                         } //end else
@@ -171,14 +183,17 @@ public class MovieApiClient {
 
                 case "search by name":
                     try {
-                        Response response =  searchMovies(query, pageNumber).execute();
+                        Response<MovieSearchResponse> response =  searchMovies(query, pageNumber).execute();
                         if (cancelRequest) {
                             return;
                         } //end if
 
                         Log.v("Response Code: ", response.code() + "");
                         if (response.code() == 200) { //200 means it worked
-                            List<MovieItem> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                            List<MovieItem> list = null;
+                            if (response.body() != null) {
+                                list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                            }
 
                             if (pageNumber == 1) {
                                 mMovies.postValue(list);
@@ -206,19 +221,34 @@ public class MovieApiClient {
                 case "popular":
 
                     try {
-                        Response response =  getPopularMovies().execute();
+                        Response<MovieSearchResponse> response =  getPopularMovies().execute();
                         if (cancelRequest) {
                             return;
                         } //end if
 
                         if (response.code() == 200) {
                             Log.v("TAG", "Response code = 200");
-                            List<MovieItem> list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
-                            Log.v("TAG", "List(0) = " + list.get(0));
+                            List<MovieItem> list = null;
+                            if (response.body() != null) {
+                                list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                            }
+
+
+                            List<Integer> tmdbids = new ArrayList<>();
+                            if (list != null) {
+                                for (MovieItem item : list) {
+                                    insertMovieDetailsInDatabase(item);
+                                } //end for
+                            } //end if
+
+
                             mMovies.postValue(list);
                         } //end if
                         else {
-                            String error = response.errorBody().string();
+                            String error = null;
+                            if (response.errorBody() != null) {
+                                error = response.errorBody().string();
+                            }
                             Log.v("Tag", "Error " + error);
                             mMovies.postValue(null);
                         } //end else
@@ -251,7 +281,7 @@ public class MovieApiClient {
 
         } //end getMovies
 
-        private Call<MovieItem> getMovies(int movie_id) {
+        private Call<MovieResponse> getMovies(int movie_id) {
             return Service.getMovieApi().getMovie(
                     movie_id,
                     Credentials.API_KEY
@@ -281,4 +311,28 @@ public class MovieApiClient {
 
 
     } //end class
+    private void insertMovieDetailsInDatabase(MovieItem response){
+        DatabaseReference childRef = DatabaseInstance.DATABASE.getReference("movies").child(response.getId()+"");
+        childRef.child("overview").setValue(response.getOverview());
+        childRef.child("title").setValue(response.getTitle());
+        childRef.child("poster_path").setValue(response.getPoster_path());
+        childRef.child("backdrop_path").setValue(response.getBackdrop_path());
+        childRef.child("likes").setValue(0);
+        childRef.child("dislikes").setValue(0);
+        childRef.child("providers").setValue(response.getProviders());
+        childRef.child("runtime").setValue(response.getRuntime());
+        childRef.child("vote_average").setValue(response.getVote_average());
+        childRef.child("release_date").setValue(response.getRelease_date());
+        childRef.child("tagline").setValue(response.getTagline());
+        childRef.child("trailer").setValue(response.getTrailerID());
+
+        StringBuilder sb= new StringBuilder();
+        response.getGenres().forEach(m -> sb.append(m).append(","));
+        if(sb.length()>0)
+            sb.delete(sb.length()-1, sb.length());
+        childRef.child("genres").setValue(sb.toString());
+
+
+        Log.i(TAG, "Completed updating DB for tmdb Id "+response.getId());
+    }
 } //end class

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,7 +30,7 @@ import java.util.List;
 
 public class Search extends AppCompatActivity implements OnMovieListener {
 
-    private static final String TAG = "CineWatch - MovieListActivity";
+    private static final String TAG = "CineWatch - Search";
     //Recycler View
     private RecyclerView recyclerView; //good
     private MovieRecyclerView movieRecyclerAdapter ;
@@ -45,7 +43,7 @@ public class Search extends AppCompatActivity implements OnMovieListener {
 
     Button home;
     private Handler handler;
-    private List<MovieItem> movies;
+    private List<MovieItem> likedMovies;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -80,7 +78,7 @@ public class Search extends AppCompatActivity implements OnMovieListener {
         ObserveAnyChange();
 
         getPopular();
-        movieRecyclerAdapter.notifyDataSetChanged();
+        //movieRecyclerAdapter.notifyDataSetChanged();
 
 
 
@@ -155,7 +153,13 @@ public class Search extends AppCompatActivity implements OnMovieListener {
 
     @Override
     public void onMovieClick(int position) {
-        Toast.makeText(this, "Info Page", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Search.this, InfoPage.class);
+        intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
+        intent.putExtra(Credentials.ACTIVE_MOVIE_KEY, movieRecyclerAdapter.getmMovies().get(position).getId());
+        intent.putExtra("where", 2);
+        startActivity(intent);
+
+        //Toast.makeText(Search.this,"Info Page",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -173,7 +177,7 @@ public class Search extends AppCompatActivity implements OnMovieListener {
                     activeUser = task.getResult().getValue(User.class);
                     ((CineWatchApplication)getApplication()).setActiveSessionUser(activeUser);
                     Log.d(TAG, "User " + userId + " fetched from database: " + activeUser);
-                    movies = activeUser.getLikedMovies();
+                    likedMovies = activeUser.getLikedMovies();
                 } else {
                     Log.e(TAG, "Unable to fetch active user");
                 }

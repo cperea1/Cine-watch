@@ -113,7 +113,8 @@ public class User implements Serializable {
 
 
     public void addLikedMovieItem(MovieItem movieItem) {
-        this.likedMovies.add(movieItem);
+        if(!this.likedMovies.contains(movieItem))
+            this.likedMovies.add(movieItem);
     }
 
 
@@ -143,7 +144,7 @@ public class User implements Serializable {
         this.dislikedMovies.add(movieItems);
     }
 
-    public void removeDislikedMovie(int movieItemId){
+    public void removeDislikedMovieItem(int movieItemId){
         this.dislikedMovies = this.dislikedMovies.stream()
                 .filter(movie -> movieItemId != movie.getId()).collect(Collectors.toList());
     }

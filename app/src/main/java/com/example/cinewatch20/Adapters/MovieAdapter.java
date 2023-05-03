@@ -25,7 +25,7 @@ public class MovieAdapter extends ArrayAdapter<MovieItem> {
     private Context context;
     private List<MovieItem> mMovies;
 
-    private OnMovieListener onMovieListener;
+    private final OnMovieListener onMovieListener;
 
     public MovieAdapter(@NonNull Context context, int resource, List<MovieItem> mMovies, OnMovieListener onMovieListener) {
         super(context, resource, mMovies);
@@ -50,13 +50,6 @@ public class MovieAdapter extends ArrayAdapter<MovieItem> {
 
         // Get the name at the current position
         MovieItem movieItem = getItem(position);
-
-        //Button trailerButton = convertView.findViewById(R.id.trailer);
-
-        // Set the name in the TextView
-        //holder.rating_bar.setRating(mMovies.get(position).getVote_average());
-        //holder.duration.setText(mMovies.get(position).getRuntime() + "");
-        //holder.overview.setText(mMovies.get(position).getOverview());
         holder.title.setText(mMovies.get(position).getTitle());
 
         Glide.with(holder.itemView.getContext())
@@ -75,7 +68,7 @@ public class MovieAdapter extends ArrayAdapter<MovieItem> {
 
     public void setmMovies(List<MovieItem> mMovies) {
         this.mMovies = mMovies;
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 }
 

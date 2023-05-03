@@ -19,7 +19,7 @@ import java.util.List;
 public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<MovieItem> mMovies;
-    private OnMovieListener onMovieListener;
+    private final OnMovieListener onMovieListener;
 
     public MovieRecyclerView(OnMovieListener onMovieListener) {
         this.onMovieListener = onMovieListener;
@@ -73,4 +73,7 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
+    public List<MovieItem> getmMovies() {
+        return mMovies;
+    }
 } //end class

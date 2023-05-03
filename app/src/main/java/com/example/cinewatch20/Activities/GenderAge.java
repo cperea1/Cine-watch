@@ -90,6 +90,7 @@ public class GenderAge extends AppCompatActivity {
                             else{
                                 Log.e(TAG, "Unable to update database with user details: "+task1.getException());
                                 Toast.makeText(GenderAge.this,"Failed to update! Try again with different information!",Toast.LENGTH_LONG).show();
+                                return;
                             }
 
                         });
