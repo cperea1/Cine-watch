@@ -93,8 +93,8 @@ public class LikedMovies extends AppCompatActivity implements OnMovieListener {
     public void onMovieClick(int position) {
         Intent intent = new Intent(LikedMovies.this, InfoPage.class);
         intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
-        intent.putExtra(Credentials.ACTIVE_MOVIE_KEY, activeUser.getBookmarkedMovies().get(position).getId());
-        intent.putExtra("where", 3);
+        intent.putExtra(Credentials.ACTIVE_MOVIE_KEY, activeUser.getLikedMovies().get(position).getId());
+        intent.putExtra("where", 4);
         startActivity(intent);
 
         Toast.makeText(LikedMovies.this,"Info Page",Toast.LENGTH_SHORT).show();

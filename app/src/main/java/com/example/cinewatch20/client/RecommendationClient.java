@@ -210,8 +210,8 @@ public class RecommendationClient implements Serializable {
      * Given a list of selected items, and returns the recommendation results.
      */
     @WorkerThread
-    public synchronized List<Result> recommend(List<MovieItem> selectedMovies) {
-        Object[] inputs = preprocess(selectedMovies);
+    public synchronized List<Result> recommend(List<MovieItem> likedMovies) {
+        Object[] inputs = preprocess(likedMovies);
 
         // Run inference.
         int[] outputIds = new int[config.outputLength];
@@ -221,7 +221,7 @@ public class RecommendationClient implements Serializable {
         outputs.put(config.outputScoresIndex, confidences);
         tflite.runForMultipleInputsOutputs(inputs, outputs);
 
-        return postProcess(outputIds, confidences, selectedMovies);
+        return postProcess(outputIds, confidences, likedMovies);
     }
 
     Interpreter getTflite() {
