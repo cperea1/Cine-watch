@@ -138,9 +138,6 @@ public class InfoPage extends AppCompatActivity implements MovieItemCallback {
                     case 3:
                         intent = new Intent(InfoPage.this, Bookmarks.class);
                         break;
-                    case 4:
-                        intent = new Intent(InfoPage.this, LikedMovies.class);
-                        break;
                 } //end switch
 
 
