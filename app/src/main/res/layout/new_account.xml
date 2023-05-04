@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+<<<<<<< HEAD:app/src/main/res/layout/new_account.xml
+    android:background="@color/pink1"
+    tools:context=".Activities.NewAccountPage"
+    android:padding="20dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/logo_picture"
+        android:layout_gravity="center"
+        android:layout_width="168dp"
+        android:layout_height="160dp"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/camera_picture"
+        android:transitionName="logo_image"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+        app:srcCompat="@drawable/camera" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounded_corner"
+        android:minWidth="48dp"
+        android:minHeight="60dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/logo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica_regular"
+            android:text="@string/hello_there"
+            android:textColor="#000"
+            android:textSize="40sp"
+            android:transitionName="logo_text"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Start_New_here"
+            android:textSize="18sp"
+            android:fontFamily="@font/advent_pro"/>
+
+
+        <ScrollView
+            android:layout_width="374dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/full_name"
+                    android:padding="10dp">
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E0E0E0"
+                        android:fontFamily="@font/advent_pro"
+                        android:inputType="textPersonName"
+                        android:textColorHint="#B71C1C"
+                        android:textSize="18sp"
+                        tools:ignore="VisualLintTextFieldSize" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Username"
+                    android:padding="10dp"
+                    app:counterMaxLength="15">
+
+                    <EditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E0E0E0"
+                        android:fontFamily="@font/advent_pro"
+                        android:inputType="text"
+                        android:textColorHint="#B71C1C"
+                        android:textSize="18sp"
+                        tools:ignore="VisualLintTextFieldSize" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:padding="10dp">
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E0E0E0"
+                        android:fontFamily="@font/advent_pro"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#B71C1C"
+                        android:textSize="18sp"
+                        tools:ignore="VisualLintTextFieldSize" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:padding="10dp"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E0E0E0"
+                        android:fontFamily="@font/advent_pro"
+                        android:inputType="textPassword"
+                        android:textColorHint="#B71C1C"
+                        android:textSize="18sp"
+                        tools:ignore="VisualLintTextFieldSize" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_rectangle"
+            android:elevation="20dp"
+            android:fontFamily="@font/aclonica_regular"
+            android:layout_gravity="center"
+            android:text="@string/next"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </LinearLayout>
+=======
+    android:background="#FF7900"
+    tools:context=".NewAccountPage"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/logo_picture"
+        android:transitionName="logo_image"
+        android:layout_width="172dp"
+        android:layout_height="167dp"
+        android:contentDescription="@string/camera_picture"
+        android:src="@drawable/camera"
+        tools:ignore="ImageContrastCheck" />
+    <TextView
+        android:id="@+id/logo_name"
+        android:transitionName="logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_back"
+        android:textSize="40sp"
+        android:textColor="#000"
+        android:fontFamily="@font/aclonica"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Start_New"
+        android:textSize="18sp"/>
+
+
+    <ScrollView
+        android:layout_width="374dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/full_name"
+                android:padding="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E0E0E0"
+                    android:fontFamily="@font/advent_pro"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#B71C1C"
+                    android:textSize="18sp"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Username"
+                android:padding="10dp"
+
+                app:counterMaxLength="15">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E0E0E0"
+                    android:fontFamily="@font/advent_pro"
+                    android:inputType="text"
+                    android:textColorHint="#B71C1C"
+                    android:textSize="18sp"
+                    tools:ignore="VisualLintTextFieldSize" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:padding="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E0E0E0"
+                    android:fontFamily="@font/advent_pro"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="#B71C1C"
+                    android:textSize="18sp"
+                    tools:ignore="VisualLintTextFieldSize" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:padding="10dp"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E0E0E0"
+                    android:fontFamily="@font/advent_pro"
+                    android:inputType="textPassword"
+                    android:textColorHint="#B71C1C"
+                    android:textSize="18sp"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/teal_700"
+        android:elevation="20dp"
+        android:fontFamily="@font/aclonica"
+        android:text="@string/next"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+>>>>>>> main:CineWatch20/app/src/main/res/layout/new_account.xml
+</LinearLayout>
