@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+<<<<<<< HEAD:app/src/main/res/layout/open_logo.xml
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,18 +25,49 @@
         app:layout_constraintVertical_bias="0.0"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
         app:srcCompat="@drawable/camera" />
+=======
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00A0A2">
+
+    <ImageView
+        android:id="@+id/camera"
+        android:transitionName="logo_image"
+        android:layout_width="457dp"
+        android:layout_height="274dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="462dp"
+        android:src="@drawable/camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:contentDescription="@string/camera_picture"/>
+>>>>>>> main:CineWatch20/app/src/main/res/layout/open_logo.xml
 
     <TextView
         android:id="@+id/opening_title"
         android:transitionName="logo_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/open_logo.xml
         android:layout_marginTop="70dp"
         android:fontFamily="@font/aclonica_regular"
         android:textColor="#000"
         android:text="@string/cinewatch"
         android:textAlignment="center"
         android:textSize="65sp"
+=======
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/aclonica"
+        android:textColor="#000"
+        android:text="@string/cinewatch"
+        android:textAlignment="center"
+        android:textSize="70sp"
+>>>>>>> main:CineWatch20/app/src/main/res/layout/open_logo.xml
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +78,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+<<<<<<< HEAD:app/src/main/res/layout/open_logo.xml
         android:fontFamily="@font/aclonica_regular"
+=======
+        android:fontFamily="@font/aclonica"
+>>>>>>> main:CineWatch20/app/src/main/res/layout/open_logo.xml
         android:textColor="#000"
         android:text="@string/movie_recommendation_app"
         android:textAlignment="center"
