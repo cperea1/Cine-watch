@@ -91,6 +91,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/pink2"
                         android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/hulu"
                         tools:layout_editor_absoluteX="29dp" />
 
@@ -107,6 +110,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/pink2"
                         android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/HBOMax"
                         tools:layout_editor_absoluteX="29dp" />
 
@@ -122,8 +128,10 @@
                         android:text="@string/peacock"
                         android:textAlignment="center"
                         android:textColor="@color/pink2"
-
                         android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/disney"
                         tools:layout_editor_absoluteX="29dp" />
 
@@ -140,6 +148,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/pink2"
                         android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/peacock"
                         tools:layout_editor_absoluteX="29dp" />
 
@@ -156,6 +167,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/pink2"
                         android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/paramount"
                         tools:layout_editor_absoluteX="29dp" />
 
@@ -172,6 +186,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/pink2"
                         android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/showtime"
                         tools:layout_editor_absoluteX="29dp" />
 
@@ -187,8 +204,10 @@
                         android:text="@string/crunchyroll"
                         android:textAlignment="center"
                         android:textColor="@color/pink2"
-
                         android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/primevideo"
                         tools:layout_editor_absoluteX="29dp" />
 
