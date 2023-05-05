@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -70,6 +71,11 @@ public class GenderAge extends AppCompatActivity {
 
                 if (gender.equals("Choose Your Gender")) {
                     Toast.makeText(GenderAge.this, "No Gender Selected", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(age.getText().toString())){
+                    Toast.makeText(GenderAge.this, "Enter age ", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
