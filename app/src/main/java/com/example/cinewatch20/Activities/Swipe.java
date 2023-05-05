@@ -345,6 +345,8 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         movieListViewModel.setmMovies(recommendations);
         progressBar.setVisibility(View.GONE);
 
+        mMovies = recommendations;
+
         arrayAdapter = new MovieAdapter(getApplicationContext(), R.layout.movie_list_item, mMovies, onMovieListener);
 
         flingAdapterView.setAdapter(arrayAdapter);
