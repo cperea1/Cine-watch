@@ -83,7 +83,7 @@ public class GenderAge extends AppCompatActivity {
                         .setValue(activeUser).addOnCompleteListener(task1 -> {
                             if(task1.isSuccessful()){
                                 Toast.makeText(GenderAge.this,"User has been updated successfully!", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getApplicationContext(), Swipe.class);
+                                Intent intent = new Intent(getApplicationContext(), Subscriptions.class);
                                 intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
                                 startActivity(intent);
                             }

@@ -13,20 +13,30 @@
     android:padding="20dp">
 
 
-
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="200dp"
-        android:orientation="vertical">
+        android:layout_width="371dp"
+        android:layout_height="687dp"
+        android:background="@drawable/rounded_corner"
+        android:orientation="vertical"
+        android:paddingTop="200dp">
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:fontFamily="@font/aclonica_regular"
+            android:text="@string/account_personalizations"
+            android:textSize="36sp"
+            android:paddingBottom="36dp"
+            />
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            android:background="@drawable/spinner_outline"/>
+            android:background="@drawable/spinner_outline"
+            android:paddingBottom="36dp"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -56,8 +66,6 @@
 
 
 
-    </LinearLayout>
-
 
     <Button
         android:id="@+id/next2"
@@ -68,10 +76,9 @@
         android:elevation="20dp"
         android:fontFamily="@font/aclonica_regular"
         android:text="@string/next"
-        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
+</LinearLayout>
 </LinearLayout>

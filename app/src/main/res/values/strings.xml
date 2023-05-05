@@ -58,5 +58,6 @@
     <string name="release_date">Release Date</string>
     <string name="liked_movies">Liked Movies</string>
     <string name="hello_there">Hello There!</string>
+    <string name="account_personalizations">Account Personalizations</string>
 
 </resources>
