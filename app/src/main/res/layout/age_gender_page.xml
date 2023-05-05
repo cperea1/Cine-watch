@@ -28,6 +28,7 @@
             android:fontFamily="@font/aclonica_regular"
             android:text="@string/account_personalizations"
             android:textSize="36sp"
+            android:transitionName="logo_text"
             android:paddingBottom="36dp"
             />
 

@@ -9,182 +9,208 @@
     android:background="@color/pink1"
     android:padding="20dp">
 
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="704dp"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@drawable/rounded_corner"
-        android:layout_marginTop="50dp">
+        android:background="@drawable/rounded_corner">
 
-        <TextView
+
+        <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:fontFamily="@font/aclonica_regular"
-            android:text="@string/select_your_subscription_options"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:layout_height="618dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="85dp"
+                    android:fontFamily="@font/aclonica_regular"
+                    android:text="@string/select_your_subscription_options"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:transitionName="logo_text" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="618dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="16dp">
 
 
-            <CheckBox
-                android:id="@+id/netflix"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/netflix"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    <CheckBox
+                        android:id="@+id/netflix"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/netflix"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:id="@+id/hulu"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/hulu"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/netflix" />
+                    <CheckBox
+                        android:id="@+id/hulu"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/hulu"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/netflix" />
 
-            <CheckBox
-                android:id="@+id/HBOMax"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/hbo_max"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/hulu"
-                tools:layout_editor_absoluteX="24dp" />
+                    <CheckBox
+                        android:id="@+id/HBOMax"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/hbo_max"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/hulu"
+                        tools:layout_editor_absoluteX="29dp" />
 
-            <CheckBox
-                android:id="@+id/disney"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/disney"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/HBOMax"
-                tools:layout_editor_absoluteX="24dp" />
+                    <CheckBox
+                        android:id="@+id/disney"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/disney"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/HBOMax"
+                        tools:layout_editor_absoluteX="29dp" />
 
-            <CheckBox
-                android:id="@+id/peacock"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/peacock"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
+                    <CheckBox
+                        android:id="@+id/peacock"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/peacock"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
 
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/disney"
-                tools:layout_editor_absoluteX="23dp" />
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/disney"
+                        tools:layout_editor_absoluteX="29dp" />
 
-            <CheckBox
-                android:id="@+id/paramount"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/paramount"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/peacock"
-                tools:layout_editor_absoluteX="24dp" />
+                    <CheckBox
+                        android:id="@+id/paramount"
+                        android:layout_width="292dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/paramount"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/peacock"
+                        tools:layout_editor_absoluteX="29dp" />
 
-            <CheckBox
-                android:id="@+id/showtime"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/showtime"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/paramount"
-                tools:layout_editor_absoluteX="23dp" />
+                    <CheckBox
+                        android:id="@+id/showtime"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/showtime"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/paramount"
+                        tools:layout_editor_absoluteX="29dp" />
 
-            <CheckBox
-                android:id="@+id/primevideo"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/prime_video"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/showtime"
-                tools:layout_editor_absoluteX="24dp" />
+                    <CheckBox
+                        android:id="@+id/primevideo"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/prime_video"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/showtime"
+                        tools:layout_editor_absoluteX="29dp" />
 
-            <CheckBox
-                android:id="@+id/crunchyroll"
-                android:layout_width="292dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_rectangle"
-                android:fontFamily="@font/aclonica_regular"
-                android:text="@string/crunchyroll"
-                android:textAlignment="center"
-                android:textColor="@color/pink2"
+                    <CheckBox
+                        android:id="@+id/crunchyroll"
+                        android:layout_width="292dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/aclonica_regular"
+                        android:text="@string/crunchyroll"
+                        android:textAlignment="center"
+                        android:textColor="@color/pink2"
 
-                android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@+id/primevideo"
-                tools:layout_editor_absoluteX="24dp" />
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toBottomOf="@+id/primevideo"
+                        tools:layout_editor_absoluteX="29dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/buttonUpdate"
-            android:layout_width="292dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_rectangle"
             android:elevation="20dp"
             android:fontFamily="@font/aclonica_regular"
-            android:layout_gravity="center"
             android:text="@string/update"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.392"
             app:layout_constraintStart_toStartOf="parent" />
-
+    </LinearLayout>
 </LinearLayout>
