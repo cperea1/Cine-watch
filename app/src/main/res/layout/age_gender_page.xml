@@ -36,6 +36,8 @@
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="61dp"
+            android:gravity="center"
+            android:textAlignment="center"
             android:background="@drawable/spinner_outline"
             android:paddingBottom="36dp"/>
 
@@ -46,13 +48,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/age"
-            android:padding="10dp"
-
+            android:padding="5dp"
             app:counterMaxLength="3">
 
             <EditText
                 android:id="@+id/age"
-                android:layout_width="match_parent"
+                android:layout_width="353dp"
                 android:layout_height="wrap_content"
                 android:background="#E0E0E0"
                 android:fontFamily="@font/advent_pro"
