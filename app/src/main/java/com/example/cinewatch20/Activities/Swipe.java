@@ -300,7 +300,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         recommendations = recommendations.stream().filter(result -> !selectedMovies.contains(result.item.getId())).collect(Collectors.toList());
         Log.i(TAG, "Fetching movie details for all recommendations");
         movieDetailsService.getMoviesDetails(
-                recommendations.stream().map(r -> r.item.getId()).collect(Collectors.toList()), (MovieDetailsCallback) this);
+                recommendations.stream().map(r -> r.item.getId()).collect(Collectors.toList()), (MovieDetailsCallback) this, activeUser.getSubscriptions());
     }
 
 
@@ -337,6 +337,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         }
     }
 
+
     @Override
     public void dbMovieDetails(List<MovieItem> movieItems) {
         showResult(movieItems);
@@ -364,6 +365,11 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
                 mMovies.remove(0);
                 arrayAdapter.notifyDataSetChanged();
 
+
+                Log.v("Movie Providers", mMovies.get(0).getProviders().toString());
+                Log.v("User Subscriptions", activeUser.getSubscriptions().toString());
+
+
             }
             @Override
             public void onRightCardExit(Object o) {
@@ -375,11 +381,16 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
                 mMovies.remove(0);
                 arrayAdapter.notifyDataSetChanged();
 
+                Log.v("Movie Providers", mMovies.get(0).getProviders().toString());
+                Log.v("User Subscriptions", activeUser.getSubscriptions().toString());
+
             }
 
             @Override
             public void onAdapterAboutToEmpty(int i) {
-
+                bindMovieDetailsService();
+                executeRecommendationEngine();
+                fetchMovieDetailsForRecommendations();
             }
 
             @Override

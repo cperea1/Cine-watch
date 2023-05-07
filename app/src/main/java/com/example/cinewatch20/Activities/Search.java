@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -20,12 +21,16 @@ import com.example.cinewatch20.Adapters.MovieRecyclerView;
 import com.example.cinewatch20.Adapters.OnMovieListener;
 import com.example.cinewatch20.CineWatchApplication;
 import com.example.cinewatch20.R;
+import com.example.cinewatch20.data.Config;
+import com.example.cinewatch20.data.FileUtil;
 import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.database.DatabaseInstance;
 import com.example.cinewatch20.models.User;
 import com.example.cinewatch20.utils.Credentials;
+import com.example.cinewatch20.utils.MovieJsonUpdater;
 import com.example.cinewatch20.viewModels.MovieListViewModel;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Search extends AppCompatActivity implements OnMovieListener {
@@ -35,7 +40,7 @@ public class Search extends AppCompatActivity implements OnMovieListener {
     private RecyclerView recyclerView; //good
     private MovieRecyclerView movieRecyclerAdapter ;
     //private MovieViewHolder movieViewHolder;
-
+    private static final String CONFIG_PATH = "config.json";  // Default config path in assets.
     //view model
     private MovieListViewModel movieListViewModel;
 
@@ -44,6 +49,7 @@ public class Search extends AppCompatActivity implements OnMovieListener {
     Button home;
     private Handler handler;
     private List<MovieItem> likedMovies;
+    private Config config;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -55,6 +61,11 @@ public class Search extends AppCompatActivity implements OnMovieListener {
         recyclerView = findViewById(R.id.recyclerView); //good
 
         home = findViewById(R.id.home_button);
+        try {
+            config = FileUtil.loadConfig(this.getAssets(), CONFIG_PATH);
+        } catch (IOException ex) {
+            Log.e(TAG, String.format("Error occurs when loading config %s: %s.", CONFIG_PATH, ex));
+        }
 
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
@@ -121,6 +132,7 @@ public class Search extends AppCompatActivity implements OnMovieListener {
 
     private void ObserveAnyChange() {
         movieListViewModel.getMovies().observe(this, new Observer<List<MovieItem>>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(List<MovieItem> movieItems) {
                 if (movieItems != null) {
@@ -130,6 +142,10 @@ public class Search extends AppCompatActivity implements OnMovieListener {
 
                     movieRecyclerAdapter.setmMovies(movieItems);
                     movieRecyclerAdapter.notifyDataSetChanged();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        MovieJsonUpdater.addMovieToJSON(movieItems, Search.this, config);
+                    }
 
                 } //end if
              } //end onChanged

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
+import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.database.DatabaseInstance;
 import com.example.cinewatch20.service.model.MovieDetails;
 import com.example.cinewatch20.service.model.VideoResults;
@@ -58,7 +59,7 @@ public class MovieDetailsService extends Service {
         return movieDetailsBinder;
     }
 
-    public void getMoviesDetails(List<Integer> movieIds, MovieDetailsCallback callback){
+    public void getMoviesDetails(List<Integer> movieIds, MovieDetailsCallback callback, List<String> subs){
         Log.d(TAG, "Fetch movie details invoked");
         List<Integer> tmdbIds = movieIds.stream()
                 .map(movieId -> TmdbIdMapper.getInstance().getTmdbId(getApplicationContext(), movieId))
@@ -67,6 +68,7 @@ public class MovieDetailsService extends Service {
 
         List<MovieDetails> moviesInDatabase = new ArrayList<>();
         List<Integer> tmdbIdNotInDatabase = new ArrayList<>();
+
 
         DatabaseReference childRef = DatabaseInstance.DATABASE.getReference("movies");
         childRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -82,12 +84,15 @@ public class MovieDetailsService extends Service {
                     } else {
                         tmdbIdNotInDatabase.add(tmdbId);
                     }
-                }
+                } //end for
 
                 if(tmdbIdNotInDatabase.size() > 0)
                     fetchDetailsFromTmdb(tmdbIdNotInDatabase);
 
-                callback.dbMovieDetails(MovieDetailsServiceUtil.DetailsToItem(moviesInDatabase));
+                List<MovieItem> mi = MovieDetailsServiceUtil.DetailsToItem(moviesInDatabase);
+                mi = MovieDetailsServiceUtil.filterBySubscription(mi, subs);
+
+                callback.dbMovieDetails(mi);
 
             }
 

@@ -1,20 +1,19 @@
 package com.example.cinewatch20.request;
 
+import android.os.Build;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.cinewatch20.Activities.InfoPage;
 import com.example.cinewatch20.AppExecutors;
 import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.database.DatabaseInstance;
 import com.example.cinewatch20.response.MovieResponse;
 import com.example.cinewatch20.response.MovieSearchResponse;
 import com.example.cinewatch20.service.MovieDetailsService;
-import com.example.cinewatch20.service.model.MovieDetails;
-import com.example.cinewatch20.service.model.VideoResults;
 import com.example.cinewatch20.utils.Credentials;
+import com.example.cinewatch20.utils.MovieJsonUpdater;
 import com.google.firebase.database.DatabaseReference;
 
 import java.io.IOException;
@@ -62,7 +61,7 @@ public class MovieApiClient {
 
         movieQueryRunnable = new MovieQueryRunnable(query, "search by name", pageNumber);
 
-        final Future myHandler = AppExecutors.getInstance().networkIO().submit(movieQueryRunnable);
+        final Future<?> myHandler = AppExecutors.getInstance().networkIO().submit(movieQueryRunnable);
 
         AppExecutors.getInstance().networkIO().schedule(new Runnable() {
             @Override
@@ -70,7 +69,6 @@ public class MovieApiClient {
                 //cancelling
                 myHandler.cancel(true);
 
-                return;
             }
         },3000, TimeUnit.MILLISECONDS);
 
@@ -82,7 +80,7 @@ public class MovieApiClient {
 
         movieQueryRunnable = new MovieQueryRunnable( "popular");
 
-        final Future myHandler = AppExecutors.getInstance().networkIO().submit(movieQueryRunnable);
+        final Future<?> myHandler = AppExecutors.getInstance().networkIO().submit(movieQueryRunnable);
 
         AppExecutors.getInstance().networkIO().schedule(new Runnable() {
             @Override
@@ -90,7 +88,6 @@ public class MovieApiClient {
                 //cancelling
                 myHandler.cancel(true);
 
-                return;
             }
         },3000, TimeUnit.MILLISECONDS);
 
@@ -102,7 +99,7 @@ public class MovieApiClient {
 
         movieQueryRunnable = new MovieQueryRunnable( "search by id", id);
 
-        final Future myHandler = AppExecutors.getInstance().networkIO().submit(movieQueryRunnable);
+        final Future<?> myHandler = AppExecutors.getInstance().networkIO().submit(movieQueryRunnable);
 
         AppExecutors.getInstance().networkIO().schedule(new Runnable() {
             @Override
@@ -110,7 +107,6 @@ public class MovieApiClient {
                 //cancelling
                 myHandler.cancel(true);
 
-                return;
             }
         },3000, TimeUnit.MILLISECONDS);
 
@@ -260,16 +256,13 @@ public class MovieApiClient {
 
 
                     break;
-            }
-
-
-
-
-
+            } //end switch
 
             if (cancelRequest) {
                 return;
             } //end if
+
+
         } //end run
 
         private Call<MovieSearchResponse> searchMovies(String query, int pageNumber) {

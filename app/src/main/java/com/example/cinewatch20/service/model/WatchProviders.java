@@ -101,5 +101,12 @@ public class WatchProviders {
         public void setLogoPath(String logoPath) {
             this.logoPath = logoPath;
         }
+
+        @Override
+        public String toString() {
+            return "Provider{" +
+                    "providerName='" + providerName + '\'' +
+                    '}';
+        }
     } //end Provider class
 } //end class

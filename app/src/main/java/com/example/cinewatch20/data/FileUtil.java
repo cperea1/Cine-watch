@@ -62,8 +62,7 @@ public class FileUtil {
     /**
      * Load candidates from asset file.
      */
-    public static Collection<MovieItem> loadMovieList(
-            AssetManager assetManager, String candidateListPath) throws IOException {
+    public static Collection<MovieItem> loadMovieList(AssetManager assetManager, String candidateListPath) throws IOException {
         String content = loadFileContent(assetManager, candidateListPath);
         Gson gson = new Gson();
         Type type = new TypeToken<Collection<MovieItem>>() {
@@ -93,7 +92,7 @@ public class FileUtil {
      * Load file content from asset file.
      */
     @SuppressWarnings("AndroidJdkLibsChecker")
-    private static String loadFileContent(AssetManager assetManager, String path) throws IOException {
+    public static String loadFileContent(AssetManager assetManager, String path) throws IOException {
         try (InputStream ins = assetManager.open(path);
              BufferedReader reader = new BufferedReader(new InputStreamReader(ins, UTF_8))) {
             return reader.lines().collect(joining(System.lineSeparator()));

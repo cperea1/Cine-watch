@@ -60,9 +60,6 @@ public class MovieAdapter extends ArrayAdapter<MovieItem> {
 
 
 
-
-
-
         return convertView;
     }
 

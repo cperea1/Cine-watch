@@ -10,6 +10,7 @@ import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.u
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -104,5 +105,25 @@ public class MovieDetailsServiceUtil {
     }
 
 
+    public static List<MovieItem> filterBySubscription(List<MovieItem> mi, List<String> subs) {
+        List<MovieItem> movieItems = new ArrayList<>();
 
+
+        for (MovieItem movieItem : mi) {
+            List<String> providers = new ArrayList<>();
+
+            for (WatchProviders.Provider provider : movieItem.getProviders()) {
+                providers.add(provider.getProviderName());
+            }
+            if(Collections.disjoint(providers, subs)){
+                continue;
+            }
+
+            movieItems.add(movieItem);
+        }
+
+
+        return movieItems;
+
+    }
 }
