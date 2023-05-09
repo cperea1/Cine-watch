@@ -115,11 +115,9 @@ public class MovieDetailsServiceUtil {
 
             movieItems.add(movieItem);
         }
-
-
         return movieItems;
 
-    }
+    } //end fbs
 
 
 

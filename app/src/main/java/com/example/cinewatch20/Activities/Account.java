@@ -127,6 +127,16 @@ public class Account extends AppCompatActivity {
             }
         });
 
+        mEditProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Account.this, UserInfo.class);
+                intent.putExtra(Credentials.ACTIVE_USER_KEY, activeUser.getId());
+                intent.putExtra("from account", true);
+                startActivity(intent);
+            }
+        });
+
         updateSubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

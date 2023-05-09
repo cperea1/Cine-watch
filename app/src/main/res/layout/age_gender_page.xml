@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/pink1"
-    tools:context=".Activities.NewAccountPage"
+    tools:context=".Activities.UserInfo"
     android:transitionName="filmTransition"
     android:padding="20dp">
 

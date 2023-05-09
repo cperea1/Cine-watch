@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cinewatch20.R;
 import com.example.cinewatch20.utils.Credentials;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -52,7 +51,7 @@ public class LoginScreen extends AppCompatActivity {
 
         //New account Button clicker
         buttonSignup.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginScreen.this, NewAccountPage.class);
+            Intent intent = new Intent(LoginScreen.this, UserInfo.class);
             startActivity(intent);
             finish();
 

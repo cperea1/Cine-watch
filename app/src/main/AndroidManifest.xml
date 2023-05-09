@@ -30,7 +30,7 @@
             android:name=".Activities.Search"
             android:exported="false" />
         <activity
-            android:name=".Activities.NewAccountPage"
+            android:name=".Activities.UserInfo"
             android:exported="false" />
         <activity
             android:name=".Activities.LoginScreen"

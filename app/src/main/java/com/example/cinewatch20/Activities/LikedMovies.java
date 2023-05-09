@@ -41,6 +41,7 @@ public class LikedMovies extends AppCompatActivity implements OnMovieListener {
     User activeUser;
 
     Button home;
+    Button emptyLikedMovies;
     private Handler handler;
     private List<MovieItem> movies;
 
@@ -55,6 +56,7 @@ public class LikedMovies extends AppCompatActivity implements OnMovieListener {
         recyclerView = findViewById(R.id.liked_movies_list); //good
 
         home = findViewById(R.id.home_button3);
+        emptyLikedMovies = findViewById(R.id.empty_likes);
         handler = new Handler();
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
@@ -69,6 +71,17 @@ public class LikedMovies extends AppCompatActivity implements OnMovieListener {
                 startActivity(intent);
 
             } //end onclick
+        });
+
+        emptyLikedMovies.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onClick(View v) {
+                activeUser.emptyLikedMovies();
+                movieRecyclerAdapter.setmMovies(activeUser.getLikedMovies());
+                movieRecyclerAdapter.notifyDataSetChanged();
+                Toast.makeText(LikedMovies.this, "Liked List has been emptied", Toast.LENGTH_SHORT).show();
+            }
         });
 
         //SetupSearchView();

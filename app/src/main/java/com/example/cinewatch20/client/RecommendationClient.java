@@ -115,11 +115,11 @@ public class RecommendationClient implements Serializable {
         candidates.clear();
     }
 
-    int[] preprocessIds(List<MovieItem> selectedMovies, int length) {
+    int[] preprocessIds(List<MovieItem> likedMovies, int length) {
         int[] inputIds = new int[length];
         Arrays.fill(inputIds, config.pad); // Fill inputIds with the default.
         int i = 0;
-        for (MovieItem item : selectedMovies) {
+        for (MovieItem item : likedMovies) {
             if (i >= inputIds.length) {
                 break;
             }

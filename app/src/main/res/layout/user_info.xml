@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/pink1"
-    tools:context=".Activities.NewAccountPage"
+    tools:context=".Activities.UserInfo"
     android:padding="20dp">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -45,6 +45,7 @@
             android:paddingRight="10dp"/>
 
         <TextView
+            android:id="@+id/update_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Start_New_here"

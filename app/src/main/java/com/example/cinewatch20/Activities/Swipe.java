@@ -300,7 +300,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         recommendations = recommendations.stream().filter(result -> !selectedMovies.contains(result.item.getId())).collect(Collectors.toList());
         Log.i(TAG, "Fetching movie details for all recommendations");
         movieDetailsService.getMoviesDetails(
-                recommendations.stream().map(r -> r.item.getId()).collect(Collectors.toList()), this, activeUser.getSubscriptions());
+                recommendations.stream().map(r -> r.item.getId()).collect(Collectors.toList()), likedMovies, this, activeUser.getSubscriptions());
     }
 
 

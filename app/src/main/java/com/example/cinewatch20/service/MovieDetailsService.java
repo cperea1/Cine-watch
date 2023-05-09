@@ -59,11 +59,11 @@ public class MovieDetailsService extends Service {
         return movieDetailsBinder;
     }
 
-    public void getMoviesDetails(List<Integer> movieIds, MovieDetailsCallback callback, List<String> subs){
+    public void getMoviesDetails(List<Integer> movieIds, List<MovieItem> likedMovies, MovieDetailsCallback callback, List<String> subs){
         Log.d(TAG, "Fetch movie details invoked");
         List<Integer> tmdbIds = movieIds.stream()
                 .map(movieId -> TmdbIdMapper.getInstance().getTmdbId(getApplicationContext(), movieId))
-                .filter(movieId -> movieId != -1)
+                .filter(movieId -> movieId != -1).filter(movieId -> likedMovies.stream().noneMatch(movieItem -> movieItem.getId() == movieId))
                 .collect(Collectors.toList());
 
         List<MovieDetails> moviesInDatabase = new ArrayList<>();

@@ -30,6 +30,7 @@ public class GenderAge extends AppCompatActivity {
     EditText age;
     private String userId;
     private final String TAG = "CineWatch - GenderBday";
+    private boolean fromAccount;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,6 +39,7 @@ public class GenderAge extends AppCompatActivity {
         setContentView(R.layout.age_gender_page);
 
         userId = getIntent().getStringExtra(Credentials.ACTIVE_USER_KEY);
+        fromAccount = getIntent().getBooleanExtra("from account", false);
         spinner = findViewById(R.id.spinner);
         nextButton = findViewById(R.id.next2);
         age = findViewById(R.id.age);
@@ -48,6 +50,10 @@ public class GenderAge extends AppCompatActivity {
                 R.array.genders, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        if (fromAccount) {
+            //set spinner and age
+        }
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
