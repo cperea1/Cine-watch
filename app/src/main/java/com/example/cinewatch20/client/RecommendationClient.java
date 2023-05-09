@@ -178,7 +178,7 @@ public class RecommendationClient implements Serializable {
      */
     @WorkerThread
     synchronized List<Result> postProcess(
-            int[] outputIds, float[] confidences, List<MovieItem> selectedMovies) {
+            int[] outputIds, float[] confidences, List<MovieItem> likedMovies) {
         final ArrayList<Result> results = new ArrayList<>();
 
         // Add recommendation results. Filter null or contained items.
@@ -194,14 +194,11 @@ public class RecommendationClient implements Serializable {
                 Log.d(TAG, String.format("Inference output[%d]. Id: %s is null", i, id));
                 continue;
             }
-            if (selectedMovies.contains(item)) {
-                Log.d(TAG, String.format("Inference output[%d]. Id: %s is contained", i, id));
-                continue;
-            }
+
             Result result = new Result(id, item, confidences[i]);
             results.add(result);
             //Log.v(TAG, String.format("Inference output[%d]. Result: %s", i, result));
-        }
+        } //end for
 
         return results;
     }

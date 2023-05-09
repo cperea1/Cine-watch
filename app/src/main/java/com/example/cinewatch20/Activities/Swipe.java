@@ -99,7 +99,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
 
         mMovies = new ArrayList<>();
         //not sure why but we need to add something to get anything to show up
-        mMovies.add(new MovieItem(-1, "helper", null, null, "/oT8MbC0FuAcwZhuucO1YRRHcYSS.jpg", "Yes", "", "", 0, 0.0f, "", "", 0, 0, false));
+        mMovies.add(new MovieItem(-1, "helper", null, null, "/oT8MbC0FuAcwZhuucO1YRRHcYSS.jpg", "Yes", "", "", 0, 0.0f, "", ""));
         arrayAdapter = new MovieAdapter(getApplicationContext(), R.layout.movie_list_item, mMovies, onMovieListener);
         flingAdapterView= findViewById(R.id.card);
         search_view = findViewById(R.id.scroll_view);
@@ -300,7 +300,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         recommendations = recommendations.stream().filter(result -> !selectedMovies.contains(result.item.getId())).collect(Collectors.toList());
         Log.i(TAG, "Fetching movie details for all recommendations");
         movieDetailsService.getMoviesDetails(
-                recommendations.stream().map(r -> r.item.getId()).collect(Collectors.toList()), (MovieDetailsCallback) this);
+                recommendations.stream().map(r -> r.item.getId()).collect(Collectors.toList()), this, activeUser.getSubscriptions());
     }
 
 
@@ -350,6 +350,8 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
         arrayAdapter = new MovieAdapter(getApplicationContext(), R.layout.movie_list_item, mMovies, onMovieListener);
 
         flingAdapterView.setAdapter(arrayAdapter);
+
+        Log.v(TAG, "Setup Complete");
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
@@ -359,7 +361,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
             @Override
             public void onLeftCardExit(Object o) {
                 Toast.makeText(Swipe.this,"dislike",Toast.LENGTH_SHORT).show();
-                Log.v("Fling", "Movie Disliked: " + mMovies.get(0));
+                //Log.v("Fling", "Movie Disliked: " + mMovies.get(0));
 
                 activeUser.addDislikedMovieItem(mMovies.get(0));
                 activeUser.removeLikedMovieItem(mMovies.get(0).getId());
@@ -370,7 +372,7 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
             @Override
             public void onRightCardExit(Object o) {
                 Toast.makeText(Swipe.this,"liked",Toast.LENGTH_SHORT).show();
-                Log.v("Fling", "Movie Liked: " + mMovies.get(0));
+                //Log.v("Fling", "Movie Liked: " + mMovies.get(0));
                 activeUser.addLikedMovieItem(mMovies.get(0));
                 activeUser.removeDislikedMovieItem(mMovies.get(0).getId());
 
@@ -381,7 +383,9 @@ public class Swipe extends AppCompatActivity implements OnMovieListener, MovieDe
 
             @Override
             public void onAdapterAboutToEmpty(int i) {
-
+                bindMovieDetailsService();
+                executeRecommendationEngine();
+                fetchMovieDetailsForRecommendations();
             }
 
             @Override

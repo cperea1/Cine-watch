@@ -29,7 +29,7 @@ import com.example.cinewatch20.viewModels.MovieListViewModel;
 import java.util.List;
 
 public class LikedMovies extends AppCompatActivity implements OnMovieListener {
-    private static final String TAG = "CineWatch - LikedMOvies";
+    private static final String TAG = "CineWatch - LikedMovies";
     //Recycler View
     private RecyclerView recyclerView; //good
     MovieRecyclerView movieRecyclerAdapter ;

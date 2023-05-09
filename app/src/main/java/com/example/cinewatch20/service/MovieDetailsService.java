@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
+import com.example.cinewatch20.data.MovieItem;
 import com.example.cinewatch20.database.DatabaseInstance;
 import com.example.cinewatch20.service.model.MovieDetails;
 import com.example.cinewatch20.service.model.VideoResults;
@@ -58,7 +59,7 @@ public class MovieDetailsService extends Service {
         return movieDetailsBinder;
     }
 
-    public void getMoviesDetails(List<Integer> movieIds, MovieDetailsCallback callback){
+    public void getMoviesDetails(List<Integer> movieIds, MovieDetailsCallback callback, List<String> subs){
         Log.d(TAG, "Fetch movie details invoked");
         List<Integer> tmdbIds = movieIds.stream()
                 .map(movieId -> TmdbIdMapper.getInstance().getTmdbId(getApplicationContext(), movieId))
@@ -87,7 +88,11 @@ public class MovieDetailsService extends Service {
                 if(tmdbIdNotInDatabase.size() > 0)
                     fetchDetailsFromTmdb(tmdbIdNotInDatabase);
 
-                callback.dbMovieDetails(MovieDetailsServiceUtil.DetailsToItem(moviesInDatabase));
+
+                List<MovieItem> mi = MovieDetailsServiceUtil.DetailsToItem(moviesInDatabase);
+                mi = MovieDetailsServiceUtil.filterBySubscription(mi, subs);
+
+                callback.dbMovieDetails(mi);
 
             }
 
@@ -110,9 +115,12 @@ public class MovieDetailsService extends Service {
                     Log.d(TAG, "Fetching details for tmdb id "+tmdbId+" on thread "+Thread.currentThread().getName());
                     MovieDetails response = future.get(60, TimeUnit.SECONDS);
 
-                    response.setProviders(response.getWatchProviders().getProviderInfoForRegion("US").getFlatrateProviders());
-                    Log.i(TAG, "Got response : " + response);
-                    insertMovieDetailsInDatabase(response);
+                    if (response.getWatchProviders().getProviderMap().size() != 0 && response.getWatchProviders().getProviderInfoForRegion("US") != null) {
+                        response.setProviders(response.getWatchProviders().getProviderInfoForRegion("US").getFlatrateProviders());
+                        Log.i(TAG, "Got response : " + response);
+                        insertMovieDetailsInDatabase(response);
+                    }
+
 
                 } catch (Exception e) {
                     Log.e(TAG, "unable to call tmdb: " + e.getMessage());

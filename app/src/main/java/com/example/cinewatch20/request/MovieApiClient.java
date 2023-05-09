@@ -189,21 +189,21 @@ public class MovieApiClient {
                         } //end if
 
                         Log.v("Response Code: ", response.code() + "");
-                        if (response.code() == 200) { //200 means it worked
+                        if (response.code() == 200) {
+                            Log.v("TAG", "Response code = 200");
                             List<MovieItem> list = null;
                             if (response.body() != null) {
                                 list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
                             }
 
-                            if (pageNumber == 1) {
-                                mMovies.postValue(list);
+                            if (list != null) {
+                                for (MovieItem item : list) {
+                                    insertMovieDetailsInDatabase(item);
+                                } //end for
                             } //end if
-                            else {
-                                List<MovieItem> currentMovies  = mMovies.getValue();
-                                currentMovies.addAll(list);
-                                mMovies.postValue(currentMovies);
-                            } //end else
 
+
+                            mMovies.postValue(list);
                         } //end if
                         else {
                             String error = response.errorBody().string();
@@ -233,8 +233,6 @@ public class MovieApiClient {
                                 list = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
                             }
 
-
-                            List<Integer> tmdbids = new ArrayList<>();
                             if (list != null) {
                                 for (MovieItem item : list) {
                                     insertMovieDetailsInDatabase(item);

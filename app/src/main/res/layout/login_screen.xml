@@ -24,7 +24,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="475dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/rounded_corner"
@@ -61,10 +61,10 @@
             style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Username">
+            android:hint="@string/email">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E0E0E0"
@@ -109,18 +109,6 @@
             android:maxWidth="300dp"
             android:text="@string/login" />
 
-        <Button
-            android:id="@+id/forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="#00000000"
-            android:elevation="0dp"
-            android:fontFamily="@font/advent_pro"
-            android:maxWidth="300dp"
-            android:text="@string/forgot_password"
-            android:textColor="#000"
-            android:textSize="18sp" />
 
 
         <Button

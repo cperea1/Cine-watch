@@ -20,8 +20,6 @@ public class MovieDetails {
     private int runtime;
     private float vote_average;
     private String tagline;
-    private Integer likes;
-    private Integer dislikes;
     @SerializedName("watch/providers")
     private WatchProviders watchProviders;
     private List<WatchProviders.Provider> providers;
@@ -142,21 +140,6 @@ public class MovieDetails {
         this.genres = genres;
     }
 
-    public Integer getLikes() {
-        return likes;
-    }
-
-    public void setLikes (Integer likes) {
-        this.likes = likes;
-    }
-
-    public Integer getDislikes() {
-        return dislikes;
-    }
-
-    public void setDislikes(Integer disLikes) {
-        this.dislikes = disLikes;
-    }
 
     @Override
     public String toString() {
@@ -173,8 +156,6 @@ public class MovieDetails {
                 ", runtime=" + runtime +
                 ", voteAverage=" + vote_average +
                 ", tagline='" + tagline + '\'' +
-                ", likes=" + likes +
-                ", dislikes=" + dislikes +
                 ", watchProviders=" + watchProviders +
                 ", providers=" + providers +
                 '}';

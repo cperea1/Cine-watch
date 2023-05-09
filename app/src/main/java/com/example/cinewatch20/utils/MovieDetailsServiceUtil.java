@@ -10,11 +10,12 @@ import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.u
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 public class MovieDetailsServiceUtil {
-    private static final String TAG = "CinemaFreak-MovieDetailsServiceUtil";
+    private static final String TAG = "CineWatch - MovieDetailsServiceUtil";
 
     public static String buildMovieDetailsUrl(int tmdbId){
         URIBuilder builder = new URIBuilder();
@@ -53,10 +54,7 @@ public class MovieDetailsServiceUtil {
                     md.getRuntime(),
                     md.getVote_average(),
                     md.getTagline(),
-                    md.getBackdrop_path(),
-                    md.getLikes(),
-                    md.getDislikes(),
-                    false
+                    md.getBackdrop_path()
             ));
         }
 
@@ -71,12 +69,10 @@ public class MovieDetailsServiceUtil {
         md.setPoster_path(snapshot.child("poster_path").getValue(String.class));
         md.setBackdrop_path(snapshot.child("backdrop_path").getValue(String.class));
         md.setTrailer(snapshot.child("trailer").getValue(String.class));
-        md.setLikes(snapshot.child("likes").getValue(Integer.class));
-        md.setDislikes(snapshot.child("dislikes").getValue(Integer.class));
-        md.setRuntime(snapshot.child("runtime").getValue(Integer.class));
         md.setRelease_date(snapshot.child("release_date").getValue(String.class));
         md.setTagline(snapshot.child("tagline").getValue(String.class));
-        md.setVote_average(snapshot.child("vote_average").getValue(Float.class));
+        md.setVote_average(snapshot.hasChild("vote_average")? snapshot.child("vote_average").getValue(Float.class) : 0);
+        md.setRuntime(snapshot.hasChild("runtime")? snapshot.child("runtime").getValue(Integer.class) : 0);
 
 
         List<WatchProviders.Provider> providersList = new ArrayList<>();
@@ -100,6 +96,28 @@ public class MovieDetailsServiceUtil {
         }
         //Log.d(TAG, "Movie mapped: "+md);
         return md;
+
+    }
+
+    public static List<MovieItem> filterBySubscription(List<MovieItem> mi, List<String> subs) {
+        List<MovieItem> movieItems = new ArrayList<>();
+
+
+        for (MovieItem movieItem : mi) {
+            List<String> providers = new ArrayList<>();
+
+            for (WatchProviders.Provider provider : movieItem.getProviders()) {
+                providers.add(provider.getProviderName());
+            }
+            if(Collections.disjoint(providers, subs)){
+                continue;
+            }
+
+            movieItems.add(movieItem);
+        }
+
+
+        return movieItems;
 
     }
 

@@ -35,11 +35,11 @@
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
             android:layout_height="61dp"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:textAlignment="center"
-            android:background="@drawable/spinner_outline"
-            android:paddingBottom="36dp"/>
+            android:background="@drawable/spinner_outline"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -53,10 +53,11 @@
 
             <EditText
                 android:id="@+id/age"
-                android:layout_width="353dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E0E0E0"
                 android:fontFamily="@font/advent_pro"
+                android:layout_gravity="center"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:textColorHint="#B71C1C"
@@ -66,21 +67,18 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <Button
+            android:id="@+id/next2"
+            android:layout_width="97dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_rectangle"
+            android:elevation="20dp"
+            android:fontFamily="@font/aclonica_regular"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/age" />
 
-
-
-    <Button
-        android:id="@+id/next2"
-        android:layout_width="97dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/rounded_rectangle"
-        android:elevation="20dp"
-        android:fontFamily="@font/aclonica_regular"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>

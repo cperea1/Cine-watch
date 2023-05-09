@@ -15,11 +15,6 @@
  */
 package com.example.cinewatch20.data;
 
-import android.annotation.SuppressLint;
-import android.text.TextUtils;
-
-import androidx.annotation.NonNull;
-
 import com.example.cinewatch20.service.model.WatchProviders;
 
 import java.io.Serializable;
@@ -45,15 +40,8 @@ public class MovieItem implements Serializable {
     private float vote_average;
     private String tagline;
     private String backdrop_path;
-    private int likes;
-    private int dislikes;
-    public boolean selected = false; // For UI selection. Default item is not selected.
 
-    private MovieItem() {
-        this(0, "", new ArrayList<>(), new ArrayList<>(), "", "", "", "", 0,0.0f, "", "", 0, 0, false);
-    }
-
-    public MovieItem(int id, String title, List<String> genres, List<WatchProviders.Provider> providers, String poster_path, String overview, String trailerID, String release_date, int runtime, float vote_average, String tagline, String backdrop_path, int likes, int dislikes, boolean selected) {
+    public MovieItem(int id, String title, List<String> genres, List<WatchProviders.Provider> providers, String poster_path, String overview, String trailerID, String release_date, int runtime, float vote_average, String tagline, String backdrop_path) {
         this.id = id;
         this.title = title;
         this.genres = genres;
@@ -66,9 +54,10 @@ public class MovieItem implements Serializable {
         this.vote_average = vote_average;
         this.tagline = tagline;
         this.backdrop_path = backdrop_path;
-        this.likes = likes;
-        this.dislikes = dislikes;
-        this.selected = selected;
+    }
+
+    public MovieItem() {
+        this(0, "", new ArrayList<>(), new ArrayList<>(), "", "", "", "", 0, 0.0f, "", "");
     }
 
     public String getRelease_date() {
@@ -134,9 +123,6 @@ public class MovieItem implements Serializable {
                 ", vote_average=" + vote_average +
                 ", tagline='" + tagline + '\'' +
                 ", backdrop_path='" + backdrop_path + '\'' +
-                ", likes=" + likes +
-                ", dislikes=" + dislikes +
-                ", selected=" + selected +
                 '}';
     }
 
@@ -170,38 +156,6 @@ public class MovieItem implements Serializable {
 
     public void setOverview(String overview) {
         this.overview = overview;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
-    public int getDislikes() {
-        return dislikes;
-    }
-
-    public void setDislikes(int dislikes) {
-        this.dislikes = dislikes;
-    }
-
-    public void updateLikes(int delta){
-        this.likes = Math.max(0, likes+delta);
-    }
-
-    public void updateDislikes(int delta){
-        this.dislikes = Math.max(0, dislikes+delta);
     }
 
 
